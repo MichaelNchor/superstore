@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const axios = require('axios');
 const session = require('express-session');
+const MemoryStore = require('memorystore')(session);
 const fileUpload = require('express-fileupload');
 const resizeImg = require('resize-img');
 const expressValidator = require('express-validator');
@@ -129,12 +130,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Express Session middleware
+// app.use(session({
+//     secret: process.env.TOKEN_KEY,
+//     resave: false,
+//     saveUninitialized: true,
+//     // cookie: { secure: true },
+// }));
+
 app.use(session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    resave: false,
     secret: process.env.TOKEN_KEY,
-    resave: true,
-    saveUninitialized: true
-//  cookie: { secure: true }
-}));
+    saveUninitialized: true,
+}))
 
 // Express Validator middleware
 app.use(expressValidator({

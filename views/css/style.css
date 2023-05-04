@@ -4229,6 +4229,8 @@ input[type="button"].btn-block {
   .input-group-small {
     display: none;
   }
+
+  
 }
 
 @media (min-width: 992px) {
