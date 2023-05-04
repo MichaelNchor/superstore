@@ -229,6 +229,8 @@ app.use('/wishlist', wishlist);
 app.use('/users', users);
 app.use('/', pages);
 
-app.listen(process.env.APP_PORT, function () {
-  console.log("Server running on port: " + process.env.APP_PORT);
+const port = process.env.APP_PORT || 5000;
+
+app.listen(port , function () {
+  console.log("Server running on port: " + port);
 });
