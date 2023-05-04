@@ -1,0 +1,66 @@
+<%- include("../admin/topbar") %>
+
+<div class="container-fluid">   
+    <div class="row px-xl-5 pb-3">  
+                    
+      <div class="col-sm-12">
+      <a class="btn btn-primary" href="/admin/products/add-product" role="button">Add new product</a>
+      <hr>      
+      <h4 class="mb-3 mt-3">Product</h4>
+      <br><br>
+      <%- include('../messages/adminMessages') %> 
+      
+      <% if (count > 0) { %>
+
+      <table class="table table-striped sorting">
+        <thead>
+            <tr class="home">
+                <th scope="col">Product</th>
+                <th scope="col">Price($)</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Product Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(function(product){ %>
+            <tr scope="row" id="id_<%= product._id %>" class="<%= product.slug %>">
+                <td><%= product.title %></td>
+                <td><%= parseFloat(product.price).toFixed(2) %></td>
+                <td><%= product.category %></td>
+                <td><%= product.desc_short %></td>
+                <td>
+                    <% if (product.image == "") { %>
+                    <img id="noimage" src="/images/noimage.png">
+                    <% } else { %>
+                    <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                    <% } %>
+                </td>
+                <td><a class="btn btn-primary text-dark" href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
+                <td><a class="btn btn-danger text-dark" class="confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+    <h3 class="text-center"> There are no products.</h3>  
+    <% } %>
+    </div>
+    
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+      <script>
+          $('tbody').sortable({
+              items: "tr:not('.home')",
+              placeholder: "ui-state-hightlight",
+              update: function () {
+                  var ids = $('tbody').sortable("serialize");
+                  var url = "/admin/products/reorder-products";
+                  $.post(url, ids);
+              }
+          });
+      
+      </script>      
+
+<%- include("../admin/footer") %>

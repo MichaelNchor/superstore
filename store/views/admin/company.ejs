@@ -1,0 +1,60 @@
+<%- include("../admin/topbar") %>
+
+<div class="container-fluid">   
+    <div class="row px-xl-5 pb-3">  
+                    
+      <div class="col-sm-12">
+      <a class="btn btn-primary" href="/admin/company/add-company-slide" role="button">Add new company</a>
+      <hr>      
+      <h4 class="mb-3 mt-3">Company</h4>
+      <br><br>
+      <%- include('../messages/adminMessages') %>      
+      <table class="table table-striped sorting">
+        <thead>
+            <tr class="home">
+                <th scope="col">Slide</th>
+                <th scope="col">Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% companys.forEach(function(company){ %>
+            <tr  scope="row"  id="id_<%= company._id %>" class="<%= company.slug %>">
+                <td><%= company.title %></td>
+                <td>
+                    <% if (company.image == "") { %>
+                    <img id="noimage" src="/images/noimage.png">
+                    <% } else { %>
+                    <img id="noimage" src="/company/<%= company._id %>/<%= company.image %>">
+                    <% } %>
+                </td>
+                <td><a class="btn btn-primary text-dark" href="/admin/company/edit-company-slide/<%= company._id %>">Edit</a></td>
+                <% if (company.slug == "shop") { %>
+                <td></td>
+                <% } else { %>
+                <td><a class="btn btn-danger confirmDeletion text-dark" href="/admin/company/delete-company-slide/<%= company._id %>">Delete</a></td>
+                <% } %>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table> 
+    <% if(companys.length == 0) { %>
+        <p>No Companies Added</p>
+    <% } %>     
+      </div> 
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+      <script>
+        $('tbody').sortable({
+            items: "tr:not('.home')",
+            placeholder: "ui-state-hightlight",
+            update: function () {
+                var ids = $('tbody').sortable("serialize");
+                var url = "/admin/company/reorder-company-slide";
+                $.post(url, ids);
+            }
+        });
+    
+    </script>             
+
+<%- include("../admin/footer") %>

@@ -1,0 +1,54 @@
+<%- include("../admin/topbar") %>
+<div class="container-fluid">   
+    <div class="row px-xl-5 pb-3">          
+      <div class="col-sm-12">
+            <a class="btn btn-primary" href="/admin/pages/add-page" role="button">Add new page</a>
+            <hr>      
+            <h4 class="mb-3 mt-3">Pages</h4>
+            <br><br>
+            <%- include('../messages/adminMessages') %>      
+            <table class="table table-striped sorting">
+              <thead>
+                  <tr class="home">
+                      <th scope="col">Title</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% pages.forEach(function(page){ %>
+                  <tr  scope="row" id="id_<%= page._id %>" class="<%= page.slug %>">
+                      <td><%= page.title %></td>
+                      <td><a class="btn btn-primary text-dark" href="/admin/pages/edit-page/<%= page._id %>">Edit</a></td>
+                      <% if (page.slug == "home") { %>
+                      <td></td>
+                      <% }  else {%>
+                      <td><a class="btn btn-danger text-dark" class="confirmDeletion" href="/admin/pages/delete-page/<%= page._id %>">Delete</a></td>
+                      <% }%>
+                  </tr>
+                  <% }); %>
+              </tbody>
+          </table> 
+          <% if(pages.length == 0) { %>
+            <p>No Pages Added</p>
+        <% } %> 
+        </div>
+        </div>
+        </div>
+
+        <!-- page reorder-pages -->
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+        <script>
+            $('tbody').sortable({
+                items: "tr:not('.home')",
+                placeholder: "ui-state-hightlight",
+                update: function () {
+                    var ids = $('tbody').sortable("serialize");
+                    var url = "/admin/pages/reorder-pages";
+                    $.post(url, ids);
+                }
+            });
+        
+        </script>
+
+<%- include("../admin/footer") %>

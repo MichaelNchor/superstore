@@ -1,0 +1,36 @@
+<%- include("../admin/topbar") %>
+ 
+<div class="container-fluid">   
+  <div class="row px-xl-5 pb-3">  
+                  
+    <div class="col-sm-12">
+    <a class="btn btn-primary" href="/admin/pages" role="button"><i class="fas fa-angle-double-left"></i>back</a>
+    <hr>      
+    <h4 class="mb-3 mt-3">Add Page</h4>
+    <%- include('../messages/adminMessages') %>      
+    <form method="post" action="/admin/pages/add-page">
+
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="title">Title </label>            
+          <input type="text" id="form4Example1" class="form-control" name="title" placeholder="title" value="<%= title %>"/>
+        </div>
+      
+        <!-- Slug input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="slug">Slug</label>            
+          <input type="text" id="form4Example2" class="form-control" name="slug" placeholder="slug" value="<%= slug %>"/>
+        </div>
+      
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="content">Content</label>
+          <textarea name="content" class="form-control" id="ta" rows="4" placeholder="content"><%= content %></textarea>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary mb-4">Submit</button>
+      </form>
+    </div>
+
+<%- include("../admin/footer") %>

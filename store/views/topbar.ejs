@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Super Store</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="../../img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- FLAGS -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
+    />
+
+    <link defer rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+</head>
+
+<body style="background-color: #0e2a47;">    
+
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-1 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center h-100">
+                    <% if (user && user.admin == 0) { %>
+                    <a href="/admin/pages" class="small nav-item nav-link">Admin</a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="d-inline-flex align-items-center h-100">
+                        <% if(user) { %>
+                        <a href="/profile">
+                        <% if(user.image === ""){ %>
+                        <img class="m-2" src="/images/user.png" alt="" width="30" height="30" style="border-radius: 50%;">
+                        <% } else { %>
+                        <img class="m-2" src="/user/<%= user._id %>/<%= user.image %>" alt="" width="30" height="30" style="border-radius: 50%;">
+                        <% } %>
+                        </a><a href="/profile" class="align-middle text-white mr-4 small"><%= user.firstname.charAt(0).toUpperCase() %><%= user.firstname.slice(1) %></a>
+                        <% } %>
+                        <button type="button" class="rounded-lg btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <% if (user) { %>
+                            <a href="/users/logout" class="dropdown-item">Logout</a>
+                            <% } else { %>
+                            <a href="/users/register" class="dropdown-item">Register</a>
+                            <a href="/users/login" class="dropdown-item">Login</a>                            
+                            <% } %>
+                        </div>
+                    </div>
+                        <div class="rounded-lg btn-group">
+                        <select id="currency_select" data-show-content="true" class="btn btn-sm selectpicker" aria-label="Default select example" name="currency" data-width="fit">
+                            <% currencies.forEach(function(c){ %>
+                            <option data-content="<%= c.currency %><i class='fi fi-<%= c.code %>'></i>" value="<%= c.currency %>" class="dropdown-item"></option>
+                            <% }) %>
+                        </select>
+                        </div>
+                </div>
+                <div class="d-inline-flex align-items-center d-block d-lg-none">
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-white"></i>
+                        <span class="badge text-white border border-dark rounded-circle" style="padding-bottom: 2px;">
+                            <% if (typeof wishlist !== "undefined") { %>
+                                <%= wishlist.length %>
+                                <% } else { %>
+                                0
+                            <% } %>
+                        </span>
+                    </a>
+                    <a href="" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                        <span class="badge text-white border border-dark rounded-circle" style="padding-bottom: 2px;">
+                            <% if (typeof cart !== "undefined") { %>
+                                <%= cart.length %>
+                                <% } else { %>
+                                0
+                            <% } %>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row rounded-lg align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="/" class="text-decoration-none">
+                        <img src="/img/logo.png" class="me-2" height="50"
+                          alt="Logo" loading="lazy" />
+                        <small style="font-family: 'Poppins', sans-serif; font-size: 14pt;" class="text-primary">Super Store</small>
+                </a>
+            </div>
+            <div class="col-lg-4 col-6 text-left">
+                <div class="input-group">
+                    <input type="text" class="rounded-lg form-control" placeholder="Search for products" id="search" name="search">
+                    <div class="input-group-append">
+                        <button type="submit" id="searchbtn" class="rounded-lg input-group-text bg-transparent text-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6 text-right">
+                <!-- <p class="m-0">Customer Service</p>
+                <h5 class="m-0">059 191 0800</h5> -->
+            </div>
+        </div>
+    </div>
+    <div class="ajaxbg">
+        <div class="ajaxinner">
+            <h3>You are now being redirected to Paypal</h3>
+            <img src="/images/ajax-loader.gif" alt="" />
+        </div>
+    </div>
+    <script>
+        // set default currency
+        $(document).ready(function(){
+            $("#currency_select option[value='<%= currency %>']").attr('selected', 'selected');  
+        })
+
+        var currencies = 
+        [{currency: 'USD', symbol: '&#36', code: 'us'},
+        {currency: 'GHS', symbol: 'GH&#162', code: 'gh'},
+        {currency: 'GBP', symbol: '&#163', code: 'gb'},
+        {currency: 'CAD', symbol: 'C&#36', code: 'ca'}];
+
+        // post selected currency
+        $('#currency_select').on("change", (e) => {
+        const index = currencies.findIndex((c) => c.currency == $('#currency_select').val());
+        $.ajax({
+          type: "POST",
+          url: "/currency",
+          data: currencies[index],
+          success: (response) => {
+            window.location.reload();
+            console.log(response);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+        });
+
+        // post selected currency
+        $('#searchbtn').on("click", (e) => {
+        var key = $('#search, .search').val(); 
+        $.ajax({
+          type: "GET",
+          url: '/search/' + key,
+          success: (response) => {
+            window.location.href = '/search/' + key;
+            console.log(response);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
+      });
+
+    </script>
+    <!-- Topbar End -->

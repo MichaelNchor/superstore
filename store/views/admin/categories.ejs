@@ -1,0 +1,68 @@
+<%- include("../admin/topbar") %>
+
+<div class="container-fluid">   
+    <div class="row px-xl-5 pb-3">  
+                    
+      <div class="col-sm-12">
+      <a class="btn btn-primary" href="/admin/categories/add-category" role="button">Add new category</a>
+      <hr>      
+      <h4 class="mb-3 mt-3">Categories</h4>
+      <br><br>
+      <%- include('../messages/adminMessages') %>      
+      <table class="table table-striped sorting">
+        <thead>
+            <tr class="home">
+                <th scope="col">Category</th>
+                <th scope="col">Image</th>
+                <th scope="col">No of Products</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(function(category){ %>
+            <tr  scope="row"  id="id_<%= category._id %>" class="<%= category.slug %>">
+                <td><%= category.title %></td>
+                <td>
+                    <% if (category.image == "") { %>
+                    <img id="noimage" src="/images/noimage.png">
+                    <% } else { %>
+                    <img id="noimage" src="/category_images/<%= category._id %>/<%= category.image %>">
+                    <% } %>
+                </td>
+                <td class="text-left align-middle">
+                <% product_lengths.forEach(function(prod){ %>
+                    <% if(prod.category == category.slug){ %>
+                    <%= prod.length %>
+                    <% } %>
+                <% }) %>
+                </td>
+                <td><a class="btn btn-primary text-dark" href="/admin/categories/edit-category/<%= category._id %>">Edit</a></td>
+                <% if (category.slug == "shop") { %>
+                <td></td>
+                <% } else { %>
+                <td><a class="btn btn-danger confirmDeletion text-dark" href="/admin/categories/delete-category/<%= category._id %>">Delete</a></td>
+                <% } %>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table> 
+    <% if(categories.length == 0) { %>
+        <p>No Categories Added</p>
+    <% } %>      
+      </div> 
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+      <script>
+        $('tbody').sortable({
+            items: "tr:not('.home')",
+            placeholder: "ui-state-hightlight",
+            update: function () {
+                var ids = $('tbody').sortable("serialize");
+                var url = "/admin/categories/reorder-categories";
+                $.post(url, ids);
+            }
+        });
+    
+    </script>             
+
+<%- include("../admin/footer") %>

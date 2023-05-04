@@ -1,0 +1,60 @@
+<%- include("../admin/topbar") %>
+
+<div class="container-fluid">   
+    <div class="row px-xl-5 pb-3">  
+                    
+      <div class="col-sm-12">
+      <a class="btn btn-primary" href="/admin/carousel/add-carousel-slide" role="button">Add new carousel</a>
+      <hr>      
+      <h4 class="mb-3 mt-3">Carousel</h4>
+      <br><br>
+      <%- include('../messages/adminMessages') %>      
+      <table class="table table-striped sorting">
+        <thead>
+            <tr class="home">
+                <th scope="col">Slide</th>
+                <th scope="col">Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% carousels.forEach(function(carousel){ %>
+            <tr  scope="row"  id="id_<%= carousel._id %>" class="<%= carousel.slug %>">
+                <td><%= carousel.title %></td>
+                <td>
+                    <% if (carousel.image == "") { %>
+                    <img id="noimage" src="/images/noimage.png">
+                    <% } else { %>
+                    <img id="noimage" src="/carousel/<%= carousel._id %>/<%= carousel.image %>">
+                    <% } %>
+                </td>
+                <td><a class="btn btn-primary text-dark" href="/admin/carousel/edit-carousel-slide/<%= carousel._id %>">Edit</a></td>
+                <% if (carousel.slug == "shop") { %>
+                <td></td>
+                <% } else { %>
+                <td><a class="btn btn-danger confirmDeletion text-dark" href="/admin/carousel/delete-carousel-slide/<%= carousel._id %>">Delete</a></td>
+                <% } %>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table> 
+    <% if(carousels.length == 0) { %>
+        <p>No Slides Added</p>
+    <% } %>      
+      </div> 
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+      <script>
+        $('tbody').sortable({
+            items: "tr:not('.home')",
+            placeholder: "ui-state-hightlight",
+            update: function () {
+                var ids = $('tbody').sortable("serialize");
+                var url = "/admin/carousel/reorder-carousel-slide";
+                $.post(url, ids);
+            }
+        });
+    
+    </script>             
+
+<%- include("../admin/footer") %>
