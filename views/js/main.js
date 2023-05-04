@@ -16,6 +16,22 @@
 //   }
 // }
 
+// post selected currency
+$('.searchbtn').on("click", (e) => {
+var key = $('.search').val();
+$.ajax({
+    type: "GET",
+    url: '/search/' + key,
+    success: (response) => {
+    window.location.href = '/search/' + key;
+    console.log(response);
+    },
+    error: (err) => {
+    console.log(err);
+    },
+})
+});
+
 (function ($) {
     "use strict";
     

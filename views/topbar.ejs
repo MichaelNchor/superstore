@@ -116,9 +116,9 @@
             </div>
             <div class="col-lg-4 col-6 text-left">
                 <div class="input-group">
-                    <input type="text" class="rounded-lg form-control" placeholder="Search for products" id="search" name="search">
+                    <input type="text" class="rounded-lg form-control search" placeholder="Search for products" name="search">
                     <div class="input-group-append">
-                        <button type="submit" id="searchbtn" class="rounded-lg input-group-text bg-transparent text-primary">
+                        <button type="submit" class="searchbtn rounded-lg input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -166,8 +166,8 @@
         });
 
         // post selected currency
-        $('#searchbtn').on("click", (e) => {
-        var key = $('#search, .search').val(); 
+        $('.searchbtn').on("click", (e) => {
+        var key = $('.search').val();
         $.ajax({
           type: "GET",
           url: '/search/' + key,
