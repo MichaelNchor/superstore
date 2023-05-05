@@ -17,8 +17,8 @@
 // }
 
 // post selected currency
-$('.searchbtn').on("click", (e) => {
-var key = $('.search').val()[1];
+$('.searchbtn2').on("click", (e) => {
+var key = $('.search2').val();
 $.ajax({
     type: "GET",
     url: '/search/' + key,
