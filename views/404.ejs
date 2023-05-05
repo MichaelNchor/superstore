@@ -30,9 +30,9 @@
                         <div class="navbar-nav mr-auto py-0">
                             <hr>
                             <div class="input-group input-group-small">
-                                <input type="text" class="form-control searchbtn" placeholder="Search for products" id="search" name="search">
+                                <input type="text" class="search form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
-                                    <button type="submit" id="" class="searchbtn input-group-text bg-transparent text-primary">
+                                    <button type="submit" class="searchbtn input-group-text bg-transparent text-primary">
                                         <i class="fa fa-search text-white"></i>
                                     </button>
                                 </div>
@@ -92,6 +92,24 @@
             <h3 class="text-center text-secondary"><a href="/" class="text-secondary">Go to Home 👉</a></h3>
         </h3>
 
+        <script>
+            // post selected currency
+            $('.searchbtn').on("click", (e) => {
+            var key = $('.search').val();
+            $.ajax({
+              type: "GET",
+              url: '/search/' + key,
+              success: (response) => {
+                window.location.href = '/search/' + key;
+                console.log(response);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            })
+          });
+        </script>
+
     <%- include("footer") -%>
 
     <!-- Back to Top -->
@@ -101,15 +119,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../../lib/easing/easing.min.js"></script>
+    <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="../../mail/jqBootstrapValidation.min.js"></script>
+    <script src="../../mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 
 </html>

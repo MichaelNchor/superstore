@@ -146,7 +146,7 @@
                     <div class="col-12">
                         <h2 class="section-tite position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3"><%= title %></span></h2>
                     </div>
-                    <% products.forEach(function(product){ %>
+                    <% products.slice().reverse().forEach(function(product){ %>
                         <div class="rounded-lg col-lg-4 col-md-6 col-sm-6 pb-1">
                             <div class="rounded-lg product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
