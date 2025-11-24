@@ -3,143 +3,363 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Super Store</title>
+    <title>Super Store - Modern E-Commerce</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="Modern online shopping experience" name="keywords">
+    <meta content="Shop the latest products with great deals" name="description">
 
     <!-- Favicon -->
     <link href="../../img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+    <!-- Google Web Fonts - Modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="../../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../css/style.css" rel="stylesheet">
+    
+    <!-- Modern Theme Stylesheet -->
+    <link href="../../css/modern-theme.css" rel="stylesheet">
 
     <!-- FLAGS -->
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
 
-    <link defer rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    
+    <style>
+        /* Additional modern topbar styles */
+        .modern-topbar {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            font-size: 0.875rem;
+            padding: 0.5rem 0;
+        }
+        
+        .modern-main-nav {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+        
+        .account-dropdown .dropdown-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .account-dropdown .dropdown-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: white;
+        }
+        
+        .currency-selector {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .currency-selector:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .nav-icons a {
+            position: relative;
+            padding: 0.5rem;
+            color: #4b5563;
+            transition: all 0.2s;
+            border-radius: 0.5rem;
+        }
+        
+        .nav-icons a:hover {
+            color: #2563eb;
+            background: #f3f4f6;
+        }
+        
+        .nav-icons .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            min-width: 1.25rem;
+            text-align: center;
+        }
+        
+        .modern-search {
+            position: relative;
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .modern-search input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #f9fafb;
+        }
+        
+        .modern-search input:focus {
+            outline: none;
+            background: white;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .modern-search .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+        }
+        
+        .modern-search button {
+            position: absolute;
+            right: 0.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .modern-search button:hover {
+            background: #1e40af;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo-section img {
+            height: 45px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            line-height: 1;
+        }
+        
+        .mobile-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        @media (max-width: 991px) {
+            .modern-search {
+                max-width: 100%;
+                margin: 1rem 0;
+            }
+        }
+    </style>
 </head>
 
-<body style="background-color: #0e2a47;">    
+<body>
 
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <% if (user && user.admin == 0) { %>
-                    <a href="/admin/pages" class="small nav-item nav-link">Admin</a>
-                    <% } %>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <div class="d-inline-flex align-items-center h-100">
-                        <% if(user) { %>
-                        <a href="/profile">
-                        <% if(user.image === ""){ %>
-                        <img class="m-2" src="/images/user.png" alt="" width="30" height="30" style="border-radius: 50%;">
-                        <% } else { %>
-                        <img class="m-2" src="/user/<%= user._id %>/<%= user.image %>" alt="" width="30" height="30" style="border-radius: 50%;">
+    <!-- Modern Topbar Start -->
+    <div class="modern-topbar">
+        <div class="container-fluid px-xl-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="d-flex align-items-center">
+                        <% if (user && user.admin == 0) { %>
+                        <a href="/admin/pages" class="text-white text-decoration-none" style="font-weight: 500;">
+                            <i class="fas fa-cog mr-2"></i>Admin Panel
+                        </a>
                         <% } %>
-                        </a><a href="/profile" class="align-middle text-white mr-4 small"><%= user.firstname.charAt(0).toUpperCase() %><%= user.firstname.slice(1) %></a>
-                        <% } %>
-                        <button type="button" class="rounded-lg btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <% if (user) { %>
-                            <a href="/users/logout" class="dropdown-item">Logout</a>
-                            <% } else { %>
-                            <a href="/users/register" class="dropdown-item">Register</a>
-                            <a href="/users/login" class="dropdown-item">Login</a>                            
-                            <% } %>
-                        </div>
-                    </div>
-                        <div class="rounded-lg btn-group">
-                        <select id="currency_select" data-show-content="true" class="btn btn-sm selectpicker" aria-label="Default select example" name="currency" data-width="fit">
-                            <% currencies.forEach(function(c){ %>
-                            <option data-content="<%= c.currency %><i class='fi fi-<%= c.code %>'></i>" value="<%= c.currency %>" class="dropdown-item"></option>
-                            <% }) %>
-                        </select>
-                        </div>
-                </div>
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="/wishlist" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-white"></i>
-                        <span class="badge text-white border border-dark rounded-circle" style="padding-bottom: 2px;">
-                            <% if (typeof wishlist !== "undefined") { %>
-                                <%= wishlist.length %>
-                                <% } else { %>
-                                0
-                            <% } %>
-                        </span>
-                    </a>
-                    <a href="/cart" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-white"></i>
-                        <span class="badge text-white border border-dark rounded-circle" style="padding-bottom: 2px;">
-                            <% if (typeof cart !== "undefined") { %>
-                                <%= cart.length %>
-                                <% } else { %>
-                                0
-                            <% } %>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row rounded-lg align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-            <div class="col-lg-4">
-                <a href="/" class="text-decoration-none">
-                        <img src="/img/logo.png" class="me-2" height="50"
-                          alt="Logo" loading="lazy" />
-                        <small style="font-family: 'Poppins', sans-serif; font-size: 14pt;" class="text-primary">Super Store</small>
-                </a>
-            </div>
-            <div class="col-lg-4 col-6 text-left">
-                <div class="input-group">
-                    <input type="text" class="rounded-lg form-control search" placeholder="Search for products" name="search">
-                    <div class="input-group-append">
-                        <button type="submit" class="searchbtn rounded-lg input-group-text bg-transparent text-primary">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-6 text-right">
-                <!-- <p class="m-0">Customer Service</p>
-                <h5 class="m-0">059 191 0800</h5> -->
+                <div class="col-lg-6 text-right">
+                    <div class="d-flex align-items-center justify-content-end gap-3">
+                        <!-- User Section -->
+                        <div class="d-flex align-items-center gap-2">
+                            <% if(user) { %>
+                            <a href="/profile" class="d-flex align-items-center text-decoration-none gap-2">
+                                <% if(user.image === ""){ %>
+                                <img class="user-avatar" src="/images/user.png" alt="User">
+                                <% } else { %>
+                                <img class="user-avatar" src="/user/<%= user._id %>/<%= user.image %>" alt="User">
+                                <% } %>
+                                <span class="text-white font-weight-bold d-none d-md-inline"><%= user.firstname.charAt(0).toUpperCase() %><%= user.firstname.slice(1) %></span>
+                            </a>
+                            <% } %>
+                            
+                            <!-- Account Dropdown -->
+                            <div class="account-dropdown dropdown">
+                                <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fas fa-user-circle mr-1"></i>Account
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right shadow-lg border-0" style="border-radius: 0.75rem; min-width: 200px;">
+                                    <% if (user) { %>
+                                    <a href="/profile" class="dropdown-item py-2">
+                                        <i class="fas fa-user mr-2"></i>My Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="/users/logout" class="dropdown-item py-2 text-danger">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                    </a>
+                                    <% } else { %>
+                                    <a href="/users/register" class="dropdown-item py-2">
+                                        <i class="fas fa-user-plus mr-2"></i>Register
+                                    </a>
+                                    <a href="/users/login" class="dropdown-item py-2">
+                                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                                    </a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Currency Selector -->
+                        <div class="currency-selector">
+                            <select id="currency_select" data-show-content="true" class="selectpicker" aria-label="Currency" name="currency" data-width="fit" style="background: transparent; border: none; color: white;">
+                                <% currencies.forEach(function(c){ %>
+                                <option data-content="<%= c.currency %> <i class='fi fi-<%= c.code %>'></i>" value="<%= c.currency %>"></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        
+                        <!-- Mobile Nav Icons -->
+                        <div class="mobile-icons d-lg-none">
+                            <a href="/wishlist" class="text-white">
+                                <i class="fas fa-heart"></i>
+                                <span class="badge badge-danger">
+                                    <% if (typeof wishlist !== "undefined") { %><%= wishlist.length %><% } else { %>0<% } %>
+                                </span>
+                            </a>
+                            <a href="/cart" class="text-white">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge badge-danger">
+                                    <% if (typeof cart !== "undefined") { %><%= cart.length %><% } else { %>0<% } %>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="ajaxbg">
-        <div class="ajaxinner">
-            <h3>You are now being redirected to Paypal</h3>
-            <img src="/images/ajax-loader.gif" alt="" />
+    <!-- Modern Topbar End -->
+    
+    <!-- Modern Main Navigation Start -->
+    <div class="modern-main-nav">
+        <div class="container-fluid px-xl-5 py-3">
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-lg-3 col-6">
+                    <a href="/" class="logo-section">
+                        <img src="/img/logo.png" alt="Super Store Logo"/>
+                        <span class="logo-text">Super Store</span>
+                    </a>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="modern-search">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search" placeholder="Search for products, brands and more..." name="search">
+                        <button type="submit" class="searchbtn">Search</button>
+                    </div>
+                </div>
+                
+                <!-- Nav Icons -->
+                <div class="col-lg-3 col-6">
+                    <div class="nav-icons d-flex align-items-center justify-content-end gap-3">
+                        <a href="/wishlist" class="d-none d-lg-flex align-items-center" title="Wishlist">
+                            <i class="fas fa-heart fa-lg"></i>
+                            <span class="badge wishlist-count-badge">
+                                <% if (typeof wishlist !== "undefined") { %><%= wishlist.length %><% } else { %>0<% } %>
+                            </span>
+                        </a>
+                        <a href="/cart" class="d-none d-lg-flex align-items-center" title="Shopping Cart">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span class="badge cart-count-badge">
+                                <% if (typeof cart !== "undefined") { %><%= cart.length %><% } else { %>0<% } %>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Search -->
+                <div class="col-12 d-lg-none mt-3">
+                    <div class="modern-search">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search2" placeholder="Search products..." name="search">
+                        <button type="submit" class="searchbtn2">Search</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- Modern Main Navigation End -->
+    <!-- Loading Overlay -->
+    <div class="ajaxbg" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;">
+        <div class="ajaxinner" style="background: white; padding: 3rem; border-radius: 1rem; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+            <h3 style="color: #1f2937; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Redirecting to PayPal</h3>
+            <img src="/images/ajax-loader.gif" alt="Loading" style="width: 60px; height: 60px;" />
+        </div>
+    </div>
+    
     <script>
-        // set default currency
+        // Set default currency
         $(document).ready(function(){
             $("#currency_select option[value='<%= currency %>']").attr('selected', 'selected');  
+            $('.selectpicker').selectpicker('refresh');
         })
 
         var currencies = 
@@ -148,38 +368,66 @@
         {currency: 'GBP', symbol: '&#163', code: 'gb'},
         {currency: 'CAD', symbol: 'C&#36', code: 'ca'}];
 
-        // post selected currency
+        // Handle currency change
         $('#currency_select').on("change", (e) => {
-        const index = currencies.findIndex((c) => c.currency == $('#currency_select').val());
-        $.ajax({
-          type: "POST",
-          url: "/currency",
-          data: currencies[index],
-          success: (response) => {
-            window.location.reload();
-            console.log(response);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+            const index = currencies.findIndex((c) => c.currency == $('#currency_select').val());
+            $.ajax({
+                type: "POST",
+                url: "/currency",
+                data: currencies[index],
+                success: (response) => {
+                    window.location.reload();
+                },
+                error: (err) => {
+                    console.error(err);
+                    if (window.Toast) {
+                        Toast.show('Failed to update currency', 'error');
+                    }
+                },
+            });
         });
 
-        // post selected currency
+        // Handle search - desktop
         $('.searchbtn').on("click", (e) => {
-        var key = $('.search').val();
-        $.ajax({
-          type: "GET",
-          url: '/search/' + key,
-          success: (response) => {
-            window.location.href = '/search/' + key;
-            console.log(response);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        })
-      });
+            e.preventDefault();
+            var key = $('.search').val().trim();
+            if (key) {
+                window.location.href = '/search/' + encodeURIComponent(key);
+            }
+        });
+        
+        // Handle search on Enter key - desktop
+        $('.search').on("keypress", (e) => {
+            if (e.which === 13) {
+                e.preventDefault();
+                var key = $('.search').val().trim();
+                if (key) {
+                    window.location.href = '/search/' + encodeURIComponent(key);
+                }
+            }
+        });
 
+        // Handle search - mobile
+        $('.searchbtn2').on("click", (e) => {
+            e.preventDefault();
+            var key = $('.search2').val().trim();
+            if (key) {
+                window.location.href = '/search/' + encodeURIComponent(key);
+            }
+        });
+        
+        // Handle search on Enter key - mobile
+        $('.search2').on("keypress", (e) => {
+            if (e.which === 13) {
+                e.preventDefault();
+                var key = $('.search2').val().trim();
+                if (key) {
+                    window.location.href = '/search/' + encodeURIComponent(key);
+                }
+            }
+        });
     </script>
+    
+    <!-- Modern UI JavaScript -->
+    <script src="../../js/modern-ui.js"></script>
     <!-- Topbar End -->

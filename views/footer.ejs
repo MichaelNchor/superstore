@@ -1,62 +1,116 @@
-    <!-- Footer Start -->
-    <div class="container-fluid text-secondary mt-5 pt-5" style="background-image: url(/img/Wave.svg); background-size: cover;">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p class="mb-4">#1 Shop for All Your Needs</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>Mango Street, Kumasi</p>
-                <p class="mb-2"><i class="fa fa-envelope text-white mr-3"></i>info@superstore.com/p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-white mr-3"></i>+233 59 191 0800</p>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <% pages.forEach(function(page){ %>
-                            <% if (page.slug == 'home'){ %>
-                                <a class="text-secondary mb-2" href="/"><i class="fa fa-angle-right mr-2"></i><%= page.title %></a>
-                            <% } else if (page.slug == 'profile'){ %>
-
-                            <% } else if (page.slug == 'checkout'){ %>
-                                                                
-                            <% } else { %>
-                            <a class="text-secondary mb-2" href="/<%= page.slug %>"><i class="fa fa-angle-right mr-2"></i><%= page.title %></a>
-                            <% } %>
-                            <% }) %>
-                        </div>
+    <!-- Modern Footer Start -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row px-xl-5">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <div class="mb-4">
+                        <a href="/" class="d-flex align-items-center text-decoration-none mb-4">
+                            <img src="/img/logo.png" alt="Super Store" height="50" class="mr-3">
+                            <span style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: white;">Super Store</span>
+                        </a>
+                        <p style="color: #d1d5db; line-height: 1.8;">#1 Shop for All Your Needs. Quality products, amazing prices, and exceptional service.</p>
                     </div>
-                    <% if(user) { %>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="/profile"><i class="fa fa-angle-right mr-2"></i>My Profile</a>
-                        </div>
+                    <h5 class="mb-4">Get In Touch</h5>
+                    <div class="mb-3">
+                        <i class="fas fa-map-marker-alt mr-3" style="color: #2563eb;"></i>
+                        <span>Mango Street, Kumasi</span>
                     </div>
-                    <% } %>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-3">Follow Us</h5>
-                        <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter text-white"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f text-white"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in text-white"></i></a>
-                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram text-white"></i></a>
-                        </div>
+                    <div class="mb-3">
+                        <i class="fas fa-envelope mr-3" style="color: #2563eb;"></i>
+                        <a href="mailto:info@superstore.com" style="color: #d1d5db;">info@superstore.com</a>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fas fa-phone-alt mr-3" style="color: #2563eb;"></i>
+                        <a href="tel:+233591910800" style="color: #d1d5db;">+233 59 191 0800</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <div class="d-flex flex-column">
+                        <% pages.forEach(function(page){ %>
+                        <% if (page.slug == 'home'){ %>
+                            <a href="/" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %></a>
+                        <% } else if (page.slug == 'profile' || page.slug == 'checkout'){ %>
+                            <!-- Skip these pages -->
+                        <% } else { %>
+                            <a href="/<%= page.slug %>" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %></a>
+                        <% } %>
+                        <% }) %>
+                    </div>
+                </div>
+                
+                <!-- My Account -->
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h5 class="mb-4">My Account</h5>
+                    <div class="d-flex flex-column">
+                        <% if(user) { %>
+                        <a href="/profile" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>My Profile</a>
+                        <a href="/cart" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Shopping Cart</a>
+                        <a href="/wishlist" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Wishlist</a>
+                        <% } else { %>
+                        <a href="/users/login" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Login</a>
+                        <a href="/users/register" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Register</a>
+                        <% } %>
+                        <a href="/cart/checkout" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Checkout</a>
+                    </div>
+                </div>
+                
+                <!-- Categories -->
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h5 class="mb-4">Categories</h5>
+                    <div class="d-flex flex-column">
+                        <% categories.slice(0, 6).forEach(function(category){ %>
+                        <a href="/products/<%= category.slug %>" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= category.title %></a>
+                        <% }) %>
+                    </div>
+                </div>
+                
+                <!-- Newsletter & Social -->
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h5 class="mb-4">Follow Us</h5>
+                    <div class="social-links d-flex flex-wrap gap-2">
+                        <a href="#" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <h5 class="mb-4">We Accept</h5>
+                        <img src="/img/payments.png" alt="Payment Methods" class="img-fluid" style="max-width: 150px; opacity: 0.8;">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-secondary">
-                    Super Store - &copy <span id="year"></span>
-                </p>
+            
+            <!-- Copyright -->
+            <div class="row border-top px-xl-5 py-4" style="border-color: rgba(255, 255, 255, 0.1) !important; margin-top: 3rem;">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="mb-0" style="color: #9ca3af;">
+                        &copy; <span id="year"></span> <strong style="color: white;">Super Store</strong>. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <p class="mb-0" style="color: #9ca3af;">
+                        Powered by <span style="color: #2563eb; font-weight: 600;">Modern E-Commerce</span>
+                    </p>
+                </div>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid-payment" src="../../img/payments.png" alt="">
-            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
         $(document).ready(function(){
@@ -64,4 +118,4 @@
             $('#year').text(date.getFullYear())
         })
     </script>
-    <!-- Footer End -->
+    <!-- Modern Footer End -->

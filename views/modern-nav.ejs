@@ -1,0 +1,39 @@
+<!-- Modern Category Navigation - Reusable Partial -->
+<div class="container-fluid" style="background: white; border-bottom: 1px solid #e5e7eb;">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light py-3">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarPages" style="border: 2px solid #2563eb; color: #2563eb;">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarPages">
+                    <div class="navbar-nav w-100 d-flex justify-content-center" style="gap: 2rem;">
+                        <% pages.forEach(function(page){ %>
+                            <% if (page.slug == "home") { %>
+                                <a href="/" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                            <% } else if(page.slug == "checkout"){%>
+                                <a href="/cart/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                            <% } else if(page.slug == "profile"){%>
+                                <!-- Skip profile -->
+                            <% } else { %>
+                                <a href="/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                            <% } %>
+                        <% }); %>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle font-weight-medium" href="#" data-toggle="dropdown" style="color: #4b5563;">
+                                <i class="fas fa-th mr-1"></i> Categories
+                            </a>
+                            <div class="dropdown-menu shadow-lg border-0" style="border-radius: 0.75rem; margin-top: 0.5rem;">
+                                <% categories.forEach(function(category){ %>
+                                    <a href="/products/<%= category.slug %>" class="dropdown-item py-2">
+                                        <i class="fas fa-angle-right mr-2" style="color: #2563eb;"></i><%= category.title %>
+                                    </a>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

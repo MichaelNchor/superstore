@@ -1,400 +1,590 @@
     <%- include("topbar") -%>
+    
     <style>
-        #s1.fa-star, #s2.fa-star, #s3.fa-star, #s4.fa-star, #s5.fa-star {
-            font-size: 30px;
-            color: #ddd !important;
+        /* Modern Product Page Styles */
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .product-image-main {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            background: white;
+        }
+        
+        .product-image-main img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        
+        .product-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        
+        .product-thumbnail {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            overflow: hidden;
             cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .product-thumbnail:hover,
+        .product-thumbnail.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .product-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-rating .stars {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-price .current {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .product-price .original {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        .product-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-add-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .social-share {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .social-share a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .social-share a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .product-tabs {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .product-tabs .nav-tabs {
+            border: none;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .product-tabs .nav-link {
+            border: none;
+            background: var(--light-bg);
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .product-tabs .nav-link.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .review-item {
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .review-form {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 0.75rem;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .star-rating i {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .star-rating i:hover,
+        .star-rating i.active {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .related-products {
+            margin-top: 4rem;
         }
     </style>
-    <!-- Navbar Start -->
-    <div class="container-fluid mb-30" style="background-color: #1c538e;">
-        <div class="row px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="rounded-0 btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                    <h6 class="text-white m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                    <i class="fa fa-angle-down text-white"></i>
-                </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                    <div class="navbar-nav w-100">
-                        <% categories.forEach(function(category){ %>
-                                <a href="/products/<%= category.slug %>" class="nav-item nav-link"><%= category.title %></a>
-                        <% }); %>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0">
-                    <a href="/" class="text-decoration-none d-block d-lg-none">
-                        <img src="/img/logo-white.png" class="me-2" height="50"
-                              alt="Logo" loading="lazy" />
-                        <small style="font-family: 'Poppins', sans-serif; font-size: 12pt;" class="text-white">Super Store</small>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <hr>
-                            <div class="input-group input-group-small">
-                                <input type="text" class="form-control search2" placeholder="Search for products" id="" name="search">
-                                <div class="input-group-append">
-                                    <button type="submit" id="" class="searchbtn2 input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search text-white"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>
-                            <% pages.forEach(function(page){ %>
-                                <% if (page.slug == "home") { %>
-                                    <a href="/" class="nav-item nav-link"><%= page.title %></a>
-                                <% } else if(page.slug == "checkout"){%>
-                                    <a href="/cart/<%= page.slug %>" class="nav-item nav-link"><%= page.title %></a>
-                                <% } else if(page.slug == "profile"){%>
-                                
-                                <% } else { %>
-                                    <a href="/<%= page.slug %>" class="nav-item nav-link"><%= page.title %></a>
-                                <% } %>
-                            <% }); %>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="/wishlist" class="btn px-0">
-                                <i class="fas fa-heart text-white"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                    <% if (typeof wishlist !== "undefined") { %>
-                                        <%= wishlist.length %>
-                                        <% } else { %>
-                                        0
-                                    <% } %>
-                                </span>
-                            </a>
-                            <a href="/cart" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-white"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                    <% if (typeof cart !== "undefined") { %>
-                                    <%= cart.length %>
-                                    <% } else { %>
-                                    0
-                                    <% } %>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+    
+    <%- include("modern-nav") -%>
+
+
+        <!-- Breadcrumb -->
+        <div class="container my-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item"><a href="/" class="text-primary"><i class="fas fa-home mr-1"></i>Home</a></li>
+                    <li class="breadcrumb-item"><a href="/products" class="text-primary">Products</a></li>
+                    <li class="breadcrumb-item active"><%= p.title %></li>
+                </ol>
+            </nav>
         </div>
-    </div>
-    <!-- Navbar End -->
 
-
-        <!-- Breadcrumb Start -->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <span class="breadcrumb-item active">Product Detail</span>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- Breadcrumb End -->
-
-
-        <!-- Shop Detail Start -->
-        <div class="container-fluid pb-5">
-            <div class="row px-xl-5">
-                <div class="col-lg-5 mb-30">
-                    <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner bg-light">
-                            <div class="carousel-item active">
-                                <img class="w-100 h-100" src="/product_images/<%= p.id %>/<%= p.image %>" alt="Image">
+        <!-- Product Detail -->
+        <div class="container pb-5">
+            <div class="row">
+                <!-- Product Gallery -->
+                <div class="col-lg-5 mb-4">
+                    <div class="product-gallery">
+                        <div class="product-image-main" id="mainImage">
+                            <img src="/product_images/<%= p.id %>/<%= p.image %>" alt="<%= p.title %>" id="mainProductImage">
+                        </div>
+                        <div class="product-thumbnails">
+                            <div class="product-thumbnail active" onclick="changeImage('/product_images/<%= p.id %>/<%= p.image %>', this)">
+                                <img src="/product_images/<%= p.id %>/<%= p.image %>" alt="Main">
                             </div>
                             <% galleryImages.forEach(function(image){ %>
-                            <% if (image != "thumbs") { %>                    
-                            <div class=" carousel-item">
-                                <img class="rounded-lg w-100 h-100" src="/product_images/<%= p.id %>/gallery/<%= image %>" alt="Image">
+                            <% if (image != "thumbs") { %>
+                            <div class="product-thumbnail" onclick="changeImage('/product_images/<%= p.id %>/gallery/<%= image %>', this)">
+                                <img src="/product_images/<%= p.id %>/gallery/<%= image %>" alt="Gallery">
                             </div>
                             <% } %>
-                            <% }); %>                
+                            <% }); %>
                         </div>
-                        <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                            <i class="fa fa-2x fa-angle-left text-white"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                            <i class="fa fa-2x fa-angle-right text-white"></i>
-                        </a>
                     </div>
                 </div>
 
-                <div class="col-lg-7 h-auto mb-30">
-                    <div class="rounded-lg h-100 bg-light p-30">
-                        <h3><%= p.title.charAt(0).toUpperCase() %><%= p.title.slice(1) %></h3>
-                        <div class="d-flex mb-3">
-                            <div class="text-primary mr-2">
-                            <% for(var i = 0 ; i < Math.floor(p.rating) ; i ++){ %>
-                            <small class="fas fa-star"></small>
-                            <% } %>
-                            <% for(var i = 0 ; i < (Math.round(p.rating) - Math.floor(p.rating)) ; i ++){ %>
-                            <small class="fas fa-star-half-alt"></small>
-                            <% } %>
-                            <% for(var i = 0 ; i < (5 - Math.ceil(p.rating)) ; i ++){ %>
-                            <small class="far fa-star"></small>
-                            <% } %>
-                            <small>(<%= p.rating.toFixed(2) %>)</small> 
+                <!-- Product Info -->
+                <div class="col-lg-7">
+                    <div class="product-info">
+                        <h1 class="product-title"><%= p.title.charAt(0).toUpperCase() %><%= p.title.slice(1) %></h1>
+                        
+                        <div class="product-rating">
+                            <div class="stars">
+                                <% for(var i = 0 ; i < Math.floor(p.rating) ; i ++){ %>
+                                <i class="fas fa-star"></i>
+                                <% } %>
+                                <% for(var i = 0 ; i < (Math.round(p.rating) - Math.floor(p.rating)) ; i ++){ %>
+                                <i class="fas fa-star-half-alt"></i>
+                                <% } %>
+                                <% for(var i = 0 ; i < (5 - Math.ceil(p.rating)) ; i ++){ %>
+                                <i class="far fa-star"></i>
+                                <% } %>
                             </div>
-                            <small class="pt-1">(<%= reviews.length %> Reviews)</small>
+                            <span class="text-muted">
+                                <strong><%= p.rating.toFixed(2) %></strong> (<%= reviews.length %> reviews)
+                            </span>
                         </div>
-                        <div class="d-flex mb-3">
-                        <h3  class="font-weight-semi-bold mb-4"><%= currency %> <%= ((p.price - (p.price*p.discount/100))*exrate).toFixed(2) %></h3><h3 class="text-muted ml-2"><del><%= currency %> <%= (p.price*exrate).toFixed(2) %></del></h3>
+                        
+                        <div class="product-price">
+                            <span class="current"><%= currency %> <%= ((p.price - (p.price*p.discount/100))*exrate).toFixed(2) %></span>
+                            <% if(p.discount > 0) { %>
+                            <span class="original"><%= currency %> <%= (p.price*exrate).toFixed(2) %></span>
+                            <span class="badge badge-success"><%= p.discount %>% OFF</span>
+                            <% } %>
                         </div>
-                        <p class="mb-4"><%= p.desc_short %></p>
-                        <div class="d-flex align-items-center mb-4 pt-2">
-                            <a href="/cart/add/<%= p.slug %>" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                                Cart</a>
+                        
+                        <p class="product-description"><%= p.desc_short %></p>
+                        
+                        <div class="product-actions">
+                            <a href="/cart/add/<%= p.slug %>" class="btn-add-cart">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                            </a>
+                            <a href="/wishlist/add/<%= p.slug %>" class="btn btn-outline-primary px-4" style="border-radius: 0.75rem; font-weight: 600;">
+                                <i class="far fa-heart"></i>
+                            </a>
                         </div>
-                        <div class="d-flex pt-2">
-                            <strong class="text-dark mr-2">Share on:</strong>
-                            <div class="d-inline-flex" id="share-buttons">
-                                <a class="text-dark px-2 facebook" href="" target="blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a class="text-dark px-2 twitter" href="" target="blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a class="text-dark px-2 linkedin" href="" target="blank">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a class="text-dark px-2 pinterest" href="" target="blank">
-                                    <i class="fab fa-pinterest"></i>
-                                </a>
-                            </div>
+                        
+                        <div class="social-share">
+                            <strong>Share:</strong>
+                            <a href="#" class="facebook" title="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="twitter" title="Share on Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="linkedin" title="Share on LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="pinterest" title="Share on Pinterest">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row px-xl-5">
-                <div class="col">
-                    <div class="rounded-lg bg-light p-30">
-                        <div class="nav nav-tabs mb-4">
-                            <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                            <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (<%= reviews.length %>)</a>
-                        </div>
+            <!-- Product Tabs -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="product-tabs">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#description">
+                                    <i class="fas fa-align-left mr-2"></i>Description
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#reviews">
+                                    <i class="fas fa-star mr-2"></i>Reviews (<%= reviews.length %>)
+                                </a>
+                            </li>
+                        </ul>
+                        
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-pane-1">
+                            <!-- Description Tab -->
+                            <div class="tab-pane fade show active" id="description">
                                 <h4 class="mb-3">Product Description</h4>
-                                <p><%- p.desc %></p>
+                                <div class="text-muted"><%- p.desc %></div>
                             </div>
-                            <div class="tab-pane fade" id="tab-pane-3">
+                            
+                            <!-- Reviews Tab -->
+                            <div class="tab-pane fade" id="reviews">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                    <h4 class="mb-4"><%= reviews.length %> review for "<%= p.title %>"</h4>   
-                                        <% r_users.slice().reverse().forEach(function(u, index, arr){ %>
-                                        <div class="media mb-4">
-                                            
-                                            <% if(u.image === ""){ %>
-                                            <img src="/images/user.png" alt="Image" class="img-fluid-profilepic mr-3 mt-1" style="width: 45px;">
-                                            <% } else { %>
-                                            <img src="/user/<%= u._id  %>/<%= u.image %>" alt="Image" class="img-fluid-profilepic mr-3 mt-1" style="width: 45px;">
-                                            <% } %>
-
-                                            <div class="media-body">
-                                                <h6><%= u.firstname %> <%= u.lastname %><small> - <i><%= reviews[index].createdAt %></i></small></h6>
-                                                <div class="text-primary mb-2">
-                                                    <% for(var i = 0 ; i < Math.floor(reviews[index].rating) ; i ++){ %>
-                                                    <i class="fas fa-star"></i>
+                                    <div class="col-md-7">
+                                        <h4 class="mb-4">
+                                            <i class="fas fa-comments mr-2"></i>
+                                            <%= reviews.length %> Review<%= reviews.length !== 1 ? 's' : '' %> for "<%= p.title %>"
+                                        </h4>
+                                        
+                                        <% if(reviews.length > 0) { %>
+                                            <% r_users.slice().reverse().forEach(function(u, index, arr){ %>
+                                            <div class="review-item">
+                                                <div class="review-header">
+                                                    <% if(u.image === ""){ %>
+                                                    <img src="/images/user.png" alt="User" class="review-avatar">
+                                                    <% } else { %>
+                                                    <img src="/user/<%= u._id %>/<%= u.image %>" alt="User" class="review-avatar">
                                                     <% } %>
-                                                    <% for(var i = 0 ; i < (Math.round(reviews[index].rating) - Math.floor(reviews[index].rating)) ; i ++){ %>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                    <% } %>
-                                                    <% for(var i = 0 ; i < (5 - Math.ceil(reviews[index].rating)) ; i ++){ %>
-                                                    <i class="far fa-star"></i>
-                                                    <% } %>
+                                                    
+                                                    <div>
+                                                        <h6 class="mb-1"><%= u.firstname %> <%= u.lastname %></h6>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="stars mr-2" style="color: var(--accent-color);">
+                                                                <% for(var i = 0 ; i < Math.floor(reviews[index].rating) ; i ++){ %>
+                                                                <i class="fas fa-star"></i>
+                                                                <% } %>
+                                                                <% for(var i = 0 ; i < (Math.round(reviews[index].rating) - Math.floor(reviews[index].rating)) ; i ++){ %>
+                                                                <i class="fas fa-star-half-alt"></i>
+                                                                <% } %>
+                                                                <% for(var i = 0 ; i < (5 - Math.ceil(reviews[index].rating)) ; i ++){ %>
+                                                                <i class="far fa-star"></i>
+                                                                <% } %>
+                                                            </div>
+                                                            <small class="text-muted"><i class="far fa-clock mr-1"></i><%= reviews[index].createdAt %></small>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <p><%= reviews[index].message %></p>
+                                                <p class="mb-0 mt-2 text-muted"><%= reviews[index].message %></p>
                                             </div>
-                                        </div>
-                                    <% }) %>
+                                            <% }) %>
+                                        <% } else { %>
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle mr-2"></i>No reviews yet. Be the first to review this product!
+                                            </div>
+                                        <% } %>
                                     </div>
-
-                                    <% if(user) { %>
-                                    <div class="col-md-6">
-                                        <h4 class="mb-4">Leave a review</h4>
-
-                                        <!-- review -->
-                                        <form id="review" method="post" action="/products/<%= p.category %>/<%= p.slug %>">
-                                        <small>Your email address will not be published. Required fields are marked *</small>
-                                        <div class="d-flex my-3">
-                                            <p class="mb-0 mr-2">Your Rating * :</p>
-                                            <div class="text-primary">
-                                                <i class="fa fa-star" aria-hidden="true" id="s1"></i>
-                                                <i class="fa fa-star" aria-hidden="true" id="s2"></i>
-                                                <i class="fa fa-star" aria-hidden="true" id="s3"></i>
-                                                <i class="fa fa-star" aria-hidden="true" id="s4"></i>
-                                                <i class="fa fa-star" aria-hidden="true" id="s5"></i>
-                                            </div>
-                                            <input type="number" id="rating" class="form-control" name="rating" placeholder="rating" value="0" min="0" max="5" hidden/>
+                                    
+                                    <div class="col-md-5">
+                                        <% if(user) { %>
+                                        <div class="review-form">
+                                            <h4 class="mb-3">
+                                                <i class="fas fa-pen mr-2"></i>Leave a Review
+                                            </h4>
+                                            
+                                            <form method="post" action="/products/<%= p.category %>/<%= p.slug %>">
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold mb-2">Your Rating *</label>
+                                                    <div class="star-rating">
+                                                        <i class="fa fa-star" id="s1"></i>
+                                                        <i class="fa fa-star" id="s2"></i>
+                                                        <i class="fa fa-star" id="s3"></i>
+                                                        <i class="fa fa-star" id="s4"></i>
+                                                        <i class="fa fa-star" id="s5"></i>
+                                                    </div>
+                                                    <input type="number" id="rating" name="rating" value="0" min="0" max="5" hidden required/>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="message" class="font-weight-bold">Your Review *</label>
+                                                    <textarea id="message" name="message" rows="5" class="form-control" placeholder="Share your experience with this product..." required></textarea>
+                                                </div>
+                                                
+                                                <button type="submit" class="btn btn-modern btn-primary btn-block">
+                                                    <i class="fas fa-paper-plane mr-2"></i>Submit Review
+                                                </button>
+                                                
+                                                <small class="text-muted d-block mt-2">
+                                                    <i class="fas fa-lock mr-1"></i>Your email address will not be published
+                                                </small>
+                                            </form>
                                         </div>
-                                            <div class="form-group">
-                                                <label for="message">Your Review *</label>
-                                                <textarea id="message" name="message" cols="30" rows="5" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <button type="submit" class="btn btn-primary px-3">Submit review</button>
-                                            </div>
-                                        </form>
-
-                                        <!-- end review -->
-
+                                        <% } else { %>
+                                        <div class="review-form text-center">
+                                            <i class="fas fa-user-lock fa-3x text-muted mb-3"></i>
+                                            <h5>Login to Review</h5>
+                                            <p class="text-muted">Please log in to leave a review for this product.</p>
+                                            <a href="/users/login" class="btn btn-modern btn-primary">
+                                                <i class="fas fa-sign-in-alt mr-2"></i>Login Now
+                                            </a>
+                                        </div>
+                                        <% } %>
                                     </div>
                                 </div>
-                                <% } else{ %>
-                                <h6>Log in to Review</h6>
-                                <% } %>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Shop Detail End -->
+        <!-- Product Detail End -->
 
 
-        <!-- Products Start -->
-        <div class="container-fluid py-5">
-            <h2 class="section-tite position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
-            <div class="row px-xl-5">
-                <div class="col">
+        <!-- Related Products -->
+        <div class="container related-products">
+            <h2 class="text-center mb-4">
+                <span class="text-gradient">You May Also Like</span>
+            </h2>
+            <div class="row">
+                <div class="col-12">
                     <div class="owl-carousel related-carousel">
                         <% products.forEach(function(product){ %>
-                                <div class="rounded-lg product-item bg-light mb-4">
-                                    <div class="rounded-lg product-img position-relative overflow-hidden">
-                                        <img class="rounded-lg img-fluid w-100" src="/product_images/<%= product._id %>/<%= product.image %>" alt="">
-                                        <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" href="/products/<%= product.category %>/<%= product.slug %>"><i class="fa fa-search"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href="/cart/add/<%= product.slug %>"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center py-4">
-                                        <a class="h6 text-decoration-none text-truncate" href=""><%= product.title.charAt(0).toUpperCase() %><%= product.title.slice(1) %></a>
-                                        <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5><%= currency %> <%= ((product.price - (product.price*product.discount/100))*exrate).toFixed(2) %></h5><h6 class="text-muted ml-2"><del><%= currency %> <%= (product.price*exrate).toFixed(2) %></del></h6>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center mb-1">
-                                            <% for(var i = 0 ; i < Math.floor(product.rating) ; i ++){ %>
-                                                <small class="fas fa-star mr-1"></small>
-                                                <% } %>
-                                                <% for(var i = 0 ; i < (Math.round(product.rating) - Math.floor(product.rating)) ; i ++){ %>
-                                                <small class="fas fa-star-half-alt mr-1"></small>
-                                                <% } %>
-                                                <% for(var i = 0 ; i < (5 - Math.ceil(product.rating)) ; i ++){ %>
-                                                <small class="far fa-star mr-1"></small>
-                                                <% } %>
-                                                <small>(<%= product.numberOfRatings %>)</small> 
-                                        </div>
-                                    </div>
+                        <div class="product-card-modern mx-2">
+                            <div class="product-image">
+                                <a href="/products/<%= product.category %>/<%= product.slug %>">
+                                    <img src="/product_images/<%= product._id %>/<%= product.image %>" alt="<%= product.title %>" loading="lazy">
+                                </a>
+                                <% if(product.discount > 0) { %>
+                                <span class="badge-modern badge-sale">-<%= product.discount %>%</span>
+                                <% } %>
+                                <div class="product-overlay">
+                                    <a href="/products/<%= product.category %>/<%= product.slug %>" class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="/cart/add/<%= product.slug %>" class="btn-icon" title="Add to Cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                    <a href="/wishlist/add/<%= product.slug %>" class="btn-icon" title="Add to Wishlist">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                </div>
                             </div>
+                            <div class="product-content">
+                                <h3 class="product-title">
+                                    <a href="/products/<%= product.category %>/<%= product.slug %>">
+                                        <%= product.title.charAt(0).toUpperCase() %><%= product.title.slice(1) %>
+                                    </a>
+                                </h3>
+                                <div class="product-rating">
+                                    <% for(var i = 0 ; i < Math.floor(product.rating) ; i ++){ %>
+                                    <i class="fas fa-star"></i>
+                                    <% } %>
+                                    <% for(var i = 0 ; i < (Math.round(product.rating) - Math.floor(product.rating)) ; i ++){ %>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <% } %>
+                                    <% for(var i = 0 ; i < (5 - Math.ceil(product.rating)) ; i ++){ %>
+                                    <i class="far fa-star"></i>
+                                    <% } %>
+                                    <span>(<%= product.numberOfRatings %>)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price"><%= currency %> <%= ((product.price - (product.price*product.discount/100))*exrate).toFixed(2) %></span>
+                                    <% if(product.discount > 0) { %>
+                                    <span class="old-price"><%= currency %> <%= (product.price*exrate).toFixed(2) %></span>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
                         <% }) %>
                     </div>
                 </div>
             </div>
         </div>
 
+        <%- include("footer") -%>
+
         <script>
+            // Image gallery functionality
+            function changeImage(src, element) {
+                document.getElementById('mainProductImage').src = src;
+                
+                // Update active thumbnail
+                document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+                element.classList.add('active');
+            }
 
+            // Social sharing
             const link = encodeURI(window.location.href);
-            const msg = encodeURIComponent('Hey, Check this out');
-            const title = encodeURIComponent(document.querySelector('title').textContent);
-
-            console.log([link, msg, title]);
+            const msg = encodeURIComponent('Check out this amazing product!');
+            const title = encodeURIComponent(document.querySelector('title') ? document.querySelector('title').textContent : 'Product');
 
             const fb = document.querySelector('.facebook');
-            fb.href = `https://www.facebook.com/share.php?u=${link}`;
+            if(fb) fb.href = `https://www.facebook.com/share.php?u=${link}`;
 
             const twitter = document.querySelector('.twitter');
-            fb.href = `https://www.twitter.com/share?&url=${link}&text=${msg}&hashtags=${title} `;
+            if(twitter) twitter.href = `https://twitter.com/intent/tweet?url=${link}&text=${msg}`;
 
-            
+            const linkedin = document.querySelector('.linkedin');
+            if(linkedin) linkedin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${link}`;
+
+            const pinterest = document.querySelector('.pinterest');
+            if(pinterest) pinterest.href = `https://pinterest.com/pin/create/button/?url=${link}&description=${msg}`;
+
+            // Star rating functionality
             $(document).ready(function(){
-                //click star
-                $('#s1').click(function(){
-                    $('#s1.fa-star').attr("style", "color: red !important")
-                    $('#s2.fa-star, #s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(1)
-                });
-
-                $('#s2').click(function(){
-                    $('#s1.fa-star, #s2.fa-star').attr("style", "color: red !important")
-                    $('#s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(2)
-                });
-               
-                $('#s3').click(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star').attr("style", "color: red !important")
-                    $('#s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(3)
+                const stars = ['#s1', '#s2', '#s3', '#s4', '#s5'];
+                
+                // Click handlers
+                stars.forEach((star, index) => {
+                    $(star).click(function(){
+                        const rating = index + 1;
+                        updateStars(rating);
+                        $('#rating').val(rating);
+                    });
+                    
+                    // Hover handlers
+                    $(star).hover(function(){
+                        updateStars(index + 1);
+                    });
                 });
                 
-                $('#s4.fa-star').click(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star, #s4.fa-star').attr("style", "color: red !important")
-                    $('#s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(4)
-                });
-               
-                $('#s5').click(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: red !important")
-                    $('#rating').val(5)
-                });
-                
-                //hover stars
-                $('#s1').hover(function(){
-                    $('#s1.fa-star').attr("style", "color: red !important")
-                    $('#s2.fa-star, #s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(1)
-                });
-
-                $('#s2').hover(function(){
-                    $('#s1.fa-star, #s2.fa-star').attr("style", "color: red !important")
-                    $('#s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(2)
-                });
-               
-                $('#s3').hover(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star').attr("style", "color: red !important")
-                    $('#s4.fa-star, #s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(3)
-                });
-                
-                $('#s4.fa-star').hover(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star, #s4.fa-star').attr("style", "color: red !important")
-                    $('#s5.fa-star').attr("style", "color: #ddd !important")
-                    $('#rating').val(4)
-                });
-               
-                $('#s5').hover(function(){
-                    $('#s1.fa-star, #s2.fa-star, #s3.fa-star, #s4.fa-star, #s5.fa-star').attr("style", "color: red !important")
-                    $('#rating').val(5)
-                });                
-            })
-
+                function updateStars(rating) {
+                    stars.forEach((star, index) => {
+                        if(index < rating) {
+                            $(star).addClass('active');
+                        } else {
+                            $(star).removeClass('active');
+                        }
+                    });
+                }
+            });
         </script>
-
-        <!-- Products End -->
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
         
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="../../lib/easing/easing.min.js"></script>
         <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
-
-        <!-- Contact Javascript File -->
         <script src="../../mail/jqBootstrapValidation.min.js"></script>
         <script src="../../mail/contact.js"></script>
-
-        <!-- Template Javascript -->
         <script src="../../js/main.js"></script>
+        <script src="../../js/modern-ui.js"></script>
     </body>
     </html>

@@ -1,200 +1,369 @@
 <%- include("topbar") -%>
 
-    <!-- Navbar Start -->
-    <div class="container-fluid mb-30" style="background-color: #1c538e;">
-        <div class="row px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="rounded-0 btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                    <h6 class="text-white m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                    <i class="fa fa-angle-down text-white"></i>
-                </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                    <div class="navbar-nav w-100">
-                        <% categories.forEach(function(category){ %>
-                                <a href="/products/<%= category.slug %>" class="nav-item nav-link"><%= category.title %></a>
-                        <% }); %>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0">
-                    <a href="/" class="text-decoration-none d-block d-lg-none">
-                        <img src="/img/logo-white.png" class="me-2" height="50"
-                              alt="Logo" loading="lazy" />
-                        <small style="font-family: 'Poppins', sans-serif; font-size: 12pt;" class="text-white">Super Store</small>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <hr>
-                            <div class="input-group input-group-small">
-                                <input type="text" class="form-control search2" placeholder="Search for products" id="" name="search">
-                                <div class="input-group-append">
-                                    <button type="submit" id="" class="searchbtn2 input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search text-white"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <hr>
-                            <% pages.forEach(function(page){ %>
-                                <% if (page.slug == "home") { %>
-                                    <a href="/" class="nav-item nav-link"><%= page.title %></a>
-                                <% } else if(page.slug == "checkout"){%>
-                                    <a href="/cart/<%= page.slug %>" class="nav-item nav-link"><%= page.title %></a>
-                                <% } else if(page.slug == "profile"){%>
-                                  
-                                <% } else { %>
-                                    <a href="/<%= page.slug %>" class="nav-item nav-link"><%= page.title %></a>
-                                <% } %>
-                            <% }); %>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="/wishlist" class="btn px-0">
-                                <i class="fas fa-heart text-white"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                    <% if (typeof wishlist !== "undefined") { %>
-                                        <%= wishlist.length %>
-                                        <% } else { %>
-                                        0
-                                    <% } %>
-                                </span>
-                            </a>
-                            <a href="/cart" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-white"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-                                    <% if (typeof cart !== "undefined") { %>
-                                    <%= cart.length %>
-                                    <% } else { %>
-                                    0
-                                    <% } %>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Navbar End -->
+<style>
+    /* Modern Cart Styles */
+    .cart-container {
+        padding: 2rem 0;
+    }
+    
+    .cart-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .cart-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    .cart-item-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .cart-item-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cart-item-content {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .cart-item-image {
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+    
+    .cart-item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .cart-item-details {
+        flex: 1;
+    }
+    
+    .cart-item-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    .cart-item-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    
+    .cart-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--light-bg);
+        border-radius: 0.5rem;
+        padding: 0.25rem;
+    }
+    
+    .quantity-control .btn-qty {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: none;
+        border-radius: 0.4rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .quantity-control .btn-qty:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .quantity-control input {
+        width: 50px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+    
+    .btn-remove {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fee;
+        color: var(--error-color);
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-remove:hover {
+        background: var(--error-color);
+        color: white;
+    }
+    
+    .cart-summary {
+        position: sticky;
+        top: 100px;
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .cart-summary h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+    
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+    }
+    
+    .summary-total {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1rem;
+        margin-top: 1rem;
+        border-top: 2px solid var(--border-color);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+    }
+    
+    .btn-checkout {
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-checkout:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    .btn-clear-cart {
+        width: 100%;
+        background: white;
+        color: var(--error-color);
+        border: 2px solid var(--error-color);
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-clear-cart:hover {
+        background: var(--error-color);
+        color: white;
+    }
+    
+    .empty-cart {
+        text-align: center;
+        padding: 4rem 0;
+    }
+    
+    .empty-cart img {
+        max-width: 300px;
+        margin-bottom: 2rem;
+        opacity: 0.7;
+    }
+    
+    .empty-cart h3 {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+    
+    .empty-cart a {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 0.75rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .empty-cart a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+</style>
 
+<%- include("modern-nav") -%>
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shopping Cart</span>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+<!-- Breadcrumb -->
+<div class="container my-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent p-0">
+            <li class="breadcrumb-item"><a href="/" class="text-primary"><i class="fas fa-home mr-1"></i>Home</a></li>
+            <li class="breadcrumb-item"><a href="/products" class="text-primary">Shop</a></li>
+            <li class="breadcrumb-item active">Shopping Cart</li>
+        </ol>
+    </nav>
+</div>
 
-        <div class="container-fluid">
-        <div class="row px-xl-5">
+<!-- Messages -->
+<div class="container">
+    <div class="row">
         <div class="col-12">        
-        <%- include('messages') %> 
+            <%- include('messages') %> 
         </div>
-        </div>
-        </div>
+    </div>
+</div>
 
-    <% if (typeof cart !== "undefined") { %>
-    <!-- Cart Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <table class="table table-light table-borderless table-hover text-center mb-0">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class="text-left">Products</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <% var total = 0; %>
-                    <% cart.forEach(function(product){ %>
-                    <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
-                    <% total += +sub %>
-                    <tbody class="align-middle">
-                        <tr>
-                            <td class="align-middle text-left pl-3"><img src="<%= product.image %>" alt="" style="width: 50px;"><%= product.title %></td>
-                            <td class="align-middle ml-3">$<%= product.price %></td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <a href="/cart/update/<%= product.title %>?action=remove" class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </a>
-                                    </div>
-                                    <input type="text" class="qty form-control form-control-sm bg-secondary border-0 text-center" value="<%= product.qty %>">
-                                    <div class="input-group-btn">
-                                        <a href="/cart/update/<%= product.title %>?action=add" class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$<%= sub %></td>
-                            <td class="align-middle"><a href="/cart/update/<%= product.title %>?action=clear" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
-                        </tr>
-                        <% }); %>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="align-middle"><a class="clearcart btn btn-danger" href="/cart/clear">Clear cart</a></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-4">
-                <!-- <form class="mb-30" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+    <% if (typeof cart !== "undefined" && cart.length > 0) { %>
+    <!-- Cart Content -->
+    <div class="container cart-container">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart mr-2"></i>Shopping Cart</h1>
+            <p class="text-muted">You have <%= cart.length %> item<%= cart.length !== 1 ? 's' : '' %> in your cart</p>
+        </div>
+        
+        <div class="row">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+                <% var total = 0; %>
+                <% cart.forEach(function(product){ %>
+                <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+                <% total += +sub %>
+                
+                <div class="cart-item-card">
+                    <div class="cart-item-content">
+                        <div class="cart-item-image">
+                            <img src="<%= product.image %>" alt="<%= product.title %>">
+                        </div>
+                        
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-title"><%= product.title %></h3>
+                            <p class="cart-item-price">$<%= product.price %></p>
+                        </div>
+                        
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <a href="/cart/update/<%= product.title %>?action=remove" class="btn-qty btn-minus">
+                                    <i class="fas fa-minus"></i>
+                                </a>
+                                <input type="text" class="qty" value="<%= product.qty %>" readonly>
+                                <a href="/cart/update/<%= product.title %>?action=add" class="btn-qty btn-plus">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="text-center d-none d-md-block">
+                                <p class="text-muted mb-0" style="font-size: 0.85rem;">Subtotal</p>
+                                <h4 class="mb-0" style="color: var(--primary-color); font-weight: 700;">$<%= sub %></h4>
+                            </div>
+                            
+                            <a href="/cart/update/<%= product.title %>?action=clear" class="btn-remove" title="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
                         </div>
                     </div>
-                </form> -->
-                <h5 class="section-tile position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
-                <div class="bg-light p-30 mb-5">
-                    <!-- <div class="border-bottom pb-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h6>Subtotal</h6>
-                            <h6>$<%= parseFloat(total).toFixed(2) %></h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div> -->
-                    <div class="pt-2">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>$<%= parseFloat(total).toFixed(2) %></h5>
-                        </div>
-                        <% if(loggedIn){ %>
-                        <a href="/cart/checkout" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</a>
-                        <% } else { %>
-                        <p class="btn btn-block font-weight-bold my-3 py-3">You must be loggedIn to Proceed to Checkout!</p>
-                        <% } %>
+                </div>
+                <% }); %>
+                
+                <!-- Clear Cart Button (mobile) -->
+                <div class="d-lg-none mt-3">
+                    <a href="/cart/clear" class="btn-clear-cart clearcart">
+                        <i class="fas fa-trash mr-2"></i>Clear Cart
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Cart Summary -->
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <h3><i class="fas fa-receipt mr-2"></i>Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal (<%= cart.length %> items):</span>
+                        <span class="font-weight-bold">$<%= parseFloat(total).toFixed(2) %></span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span class="font-weight-bold text-success">FREE</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span>$<%= parseFloat(total).toFixed(2) %></span>
+                    </div>
+                    
+                    <% if(loggedIn){ %>
+                    <a href="/cart/checkout" class="btn-checkout">
+                        <i class="fas fa-lock mr-2"></i>Proceed to Checkout
+                    </a>
+                    <% } else { %>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Please <a href="/users/login" class="font-weight-bold">login</a> to proceed to checkout
+                    </div>
+                    <% } %>
+                    
+                    <a href="/cart/clear" class="btn-clear-cart clearcart">
+                        <i class="fas fa-trash mr-2"></i>Clear Cart
+                    </a>
+                    
+                    <div class="text-center mt-3">
+                        <a href="/products" class="text-primary">
+                            <i class="fas fa-arrow-left mr-1"></i>Continue Shopping
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Cart End -->
 
-    <form class="pp" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <!-- Hidden PayPal Form -->
+    <form class="pp" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display: none;">
         <input type="hidden" name="cmd" value="_cart">
         <input type="hidden" name="upload" value="1">
         <input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
@@ -208,64 +377,60 @@
         <input type="hidden" name="currency_code" value="USD">
         <input type="hidden" name="amount" value="<%= total %>">
         <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-        </form>
+    </form>
         
-        <% } else {%>
+    <% } else {%>
+    <!-- Empty Cart -->
+    <div class="container">
+        <div class="empty-cart">
+            <img src="/img/empty-cart.webp" alt="Empty Cart">
+            <h3>Your Cart is Empty</h3>
+            <p class="text-muted mb-4">Looks like you haven't added any items to your cart yet.</p>
+            <a href="/products">
+                <i class="fas fa-shopping-bag mr-2"></i>Start Shopping
+            </a>
+        </div>
+    </div>
+    <% } %>
         
-            <h3 class="text-center text-white">
-                <img id="img-404" class="" src="/img/empty-cart.webp" alt="">
-                <h3 class="text-center text-secondary"><a href="/" class="text-secondary">Go to Home 👉</a></h3>
-            </h3>
-        <% } %>
-        
-        <script>
-            
+    <%- include("footer") -%>
+
+    <script>
         $(function() {
-           
+            // Confirm clear cart
             $('a.clearcart').on('click', function () {
-                if (!confirm('Confirm clear cart'))
+                if (!confirm('Are you sure you want to clear your cart?'))
                     return false;
             });
 
+            // Confirm remove last item
             $('a.btn-minus').on('click', function () {
-            
-                if($('.qty').val() <= 1){
-                if (!confirm('Confirm clear cart'))
-                    return false;
+                const qtyInput = $(this).closest('.quantity-control').find('.qty');
+                if(qtyInput.val() <= 1){
+                    if (!confirm('Remove this item from cart?'))
+                        return false;
                 }
             });
             
+            // PayPal buy now
             $('a.buynow').on('click', function (e) {
                 e.preventDefault();
-                
                 $.get('/cart/buynow', function() {
                     $('form.pp input[type=image]').click();
                     $('.ajaxbg').show();
                 });
             });
-                
         });
-            
-        </script>
-
-    <%- include("footer") -%>
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
-
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/modern-ui.js"></script>
 </body>
-
 </html>
