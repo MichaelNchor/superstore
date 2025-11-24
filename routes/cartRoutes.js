@@ -34,6 +34,7 @@ router.get('/', function (req, res) {
 router.get('/add/:product', function (req, res) {
 
     var slug = req.params.product;
+    var isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
 
     Product.findOne({slug: slug})
     .then((p)=>{
@@ -68,11 +69,29 @@ router.get('/add/:product', function (req, res) {
         }
 
         console.log(req.session.cart);
+        
+        // Return JSON for AJAX requests
+        if (isAjax) {
+            return res.json({
+                success: true,
+                message: 'Product added to cart!',
+                cartCount: req.session.cart.length
+            });
+        }
+        
         req.flash('success', 'Product added!');
         res.redirect('back');
     })
     .catch((err)=>{
         console.log(err);
+        if (isAjax) {
+            return res.json({
+                success: false,
+                message: 'Failed to add product'
+            });
+        }
+        req.flash('danger', 'Error adding product');
+        res.redirect('back');
     })
 });
 
@@ -102,22 +121,33 @@ router.get('/update/:product', function (req, res) {
     var slug = req.params.product;
     var cart = req.session.cart;
     var action = req.query.action;
+    var isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
+    var newQuantity = 0;
+    var subtotal = 0;
 
     for (var i = 0; i < cart.length; i++) {
         if (cart[i].title == slug) {
             switch (action) {
                 case "add":
                     cart[i].qty++;
+                    newQuantity = cart[i].qty;
+                    subtotal = cart[i].qty * cart[i].price;
                     break;
                 case "remove":
                     cart[i].qty--;
-                    if (cart[i].qty < 1)
+                    if (cart[i].qty < 1) {
                         cart.splice(i, 1);
+                        newQuantity = 0;
+                    } else {
+                        newQuantity = cart[i].qty;
+                        subtotal = cart[i].qty * cart[i].price;
+                    }
                     break;
                 case "clear":
                     cart.splice(i, 1);
                     if (cart.length == 0)
                         delete req.session.cart;
+                    newQuantity = 0;
                     break;
                 default:
                     console.log('update problem');
@@ -125,6 +155,26 @@ router.get('/update/:product', function (req, res) {
             }
             break;
         }
+    }
+
+    // Calculate total
+    var total = 0;
+    if (req.session.cart) {
+        for (var i = 0; i < req.session.cart.length; i++) {
+            total += req.session.cart[i].qty * req.session.cart[i].price;
+        }
+    }
+
+    // Return JSON for AJAX requests
+    if (isAjax) {
+        return res.json({
+            success: true,
+            message: 'Cart updated!',
+            cartCount: req.session.cart ? req.session.cart.length : 0,
+            newQuantity: newQuantity,
+            subtotal: parseFloat(subtotal),
+            total: parseFloat(total)
+        });
     }
 
     req.flash('success', 'Cart updated!');
@@ -135,11 +185,49 @@ router.get('/update/:product', function (req, res) {
 /*
  * GET clear cart
  */
-router.get('/clear', function (req, res) {
+router.get('/clear/:product?', function (req, res) {
 
-    delete req.session.cart;
+    var isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
+    var slug = req.params.product;
     
-    req.flash('success', 'Cart cleared!');
+    if (slug) {
+        // Clear specific item
+        var cart = req.session.cart;
+        if (cart) {
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].title == slug) {
+                    cart.splice(i, 1);
+                    break;
+                }
+            }
+            if (cart.length == 0) {
+                delete req.session.cart;
+            }
+        }
+    } else {
+        // Clear entire cart
+        delete req.session.cart;
+    }
+    
+    // Calculate total
+    var total = 0;
+    if (req.session.cart) {
+        for (var i = 0; i < req.session.cart.length; i++) {
+            total += req.session.cart[i].qty * req.session.cart[i].price;
+        }
+    }
+    
+    // Return JSON for AJAX requests
+    if (isAjax) {
+        return res.json({
+            success: true,
+            message: slug ? 'Item removed from cart!' : 'Cart cleared!',
+            cartCount: req.session.cart ? req.session.cart.length : 0,
+            total: parseFloat(total)
+        });
+    }
+    
+    req.flash('success', slug ? 'Item removed!' : 'Cart cleared!');
     res.redirect('/cart');
 
 });

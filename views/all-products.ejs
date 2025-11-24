@@ -2,27 +2,23 @@
 <%- include("modern-nav") -%>
 
 <!-- Breadcrumb -->
-<div class="container my-4">
+<div class="container my-3">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent p-0">
+        <ol class="breadcrumb bg-transparent p-0 mb-0">
             <li class="breadcrumb-item"><a href="/" class="text-primary"><i class="fas fa-home mr-1"></i>Home</a></li>
             <li class="breadcrumb-item active"><%= title %></li>
         </ol>
     </nav>
 </div>
-    <!-- Messages -->
-    <div class="container-fluid py-3">
-        <div class="row px-xl-5">
-            <div class="col-12">        
-                <%- include('messages') %> 
-            </div>
-        </div>
-    </div>
 
-    <!-- Modern Shop Start -->
-    <div class="container-fluid section-modern">
-        <div class="container">
-            <div class="row px-xl-5">
+<!-- Messages -->
+<div class="container mb-3">
+    <%- include('messages') %> 
+</div>
+
+<!-- Modern Shop Start -->
+<div class="container" style="padding-bottom: 3rem;">
+    <div class="row">
                 <!-- Modern Sidebar Start -->
                 <div class="col-lg-3 col-md-4 mb-5">
                     <!-- Category Filter -->
