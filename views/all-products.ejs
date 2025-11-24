@@ -1,58 +1,15 @@
-    <%- include("topbar") -%>
+<%- include("topbar") -%>
+<%- include("modern-nav") -%>
 
-    <!-- Modern Category Navigation -->
-    <div class="container-fluid" style="background: white; border-bottom: 1px solid #e5e7eb;">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light py-3">
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarPages" style="border: 2px solid #2563eb; color: #2563eb;">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarPages">
-                        <div class="navbar-nav w-100 d-flex justify-content-center" style="gap: 2rem;">
-                            <% pages.forEach(function(page){ %>
-                                <% if (page.slug == "home") { %>
-                                    <a href="/" class="nav-item nav-link font-weight-medium" style="color: #4b5563;"><%= page.title %></a>
-                                <% } else if(page.slug == "checkout"){%>
-                                    <a href="/cart/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563;"><%= page.title %></a>
-                                <% } else if(page.slug == "profile"){%>
-                                <% } else { %>
-                                    <a href="/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563;"><%= page.title %></a>
-                                <% } %>
-                            <% }); %>
-                            <div class="dropdown">
-                                <a class="nav-link dropdown-toggle font-weight-medium" href="#" data-toggle="dropdown" style="color: #2563eb;">
-                                    <i class="fas fa-th mr-1"></i> All Categories
-                                </a>
-                                <div class="dropdown-menu shadow-lg border-0" style="border-radius: 0.75rem;">
-                                    <% categories.forEach(function(category){ %>
-                                        <a href="/products/<%= category.slug %>" class="dropdown-item py-2">
-                                            <i class="fas fa-angle-right mr-2" style="color: #2563eb;"></i><%= category.title %>
-                                        </a>
-                                    <% }); %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modern Breadcrumb -->
-    <div class="container-fluid" style="background: #f9fafb; padding: 1.5rem 0;">
-        <div class="container">
-            <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav style="font-size: 0.875rem;">
-                        <a href="/" style="color: #6b7280; text-decoration: none;">Home</a>
-                        <i class="fas fa-chevron-right mx-2" style="font-size: 0.75rem; color: #d1d5db;"></i>
-                        <span style="color: #2563eb; font-weight: 600;"><%= title %></span>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Breadcrumb -->
+<div class="container my-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent p-0">
+            <li class="breadcrumb-item"><a href="/" class="text-primary"><i class="fas fa-home mr-1"></i>Home</a></li>
+            <li class="breadcrumb-item active"><%= title %></li>
+        </ol>
+    </nav>
+</div>
     <!-- Messages -->
     <div class="container-fluid py-3">
         <div class="row px-xl-5">

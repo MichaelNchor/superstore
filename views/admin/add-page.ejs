@@ -1,36 +1,67 @@
 <%- include("../admin/topbar") %>
  
-<div class="container-fluid">   
+<div class="container-fluid" style="background: #f8fafc; min-height: 100vh; padding: 2rem 0;">   
   <div class="row px-xl-5 pb-3">  
                   
     <div class="col-sm-12">
-    <a class="btn btn-primary" href="/admin/pages" role="button"><i class="fas fa-angle-double-left"></i>back</a>
-    <hr>      
-    <h4 class="mb-3 mt-3">Add Page</h4>
-    <%- include('../messages/adminMessages') %>      
-    <form method="post" action="/admin/pages/add-page">
+      <a class="btn-modern btn-modern-secondary" href="/admin/pages" style="margin-bottom: 1.5rem; display: inline-flex; align-items: center;">
+        <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+        Back to Pages
+      </a>
 
-        <!-- Name input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="title">Title </label>            
-          <input type="text" id="form4Example1" class="form-control" name="title" placeholder="title" value="<%= title %>"/>
-        </div>
-      
-        <!-- Slug input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="slug">Slug</label>            
-          <input type="text" id="form4Example2" class="form-control" name="slug" placeholder="slug" value="<%= slug %>"/>
-        </div>
-      
-        <!-- Message input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="content">Content</label>
-          <textarea name="content" class="form-control" id="ta" rows="4" placeholder="content"><%= content %></textarea>
-        </div>
-        
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary mb-4">Submit</button>
-      </form>
+      <div class="admin-header-modern" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: white; margin: 0; font-size: 1.75rem; font-weight: 600; display: flex; align-items: center;">
+          <i class="fas fa-plus-circle" style="margin-right: 0.75rem;"></i>
+          Add New Page
+        </h2>
+        <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0; font-size: 0.95rem;">Create a new website page</p>
+      </div>
+
+      <%- include('../messages/adminMessages') %>
+
+      <div class="card-modern" style="background: white; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); padding: 2rem;">      
+        <form method="post" action="/admin/pages/add-page">
+
+            <!-- Name input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="title" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-heading" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Page Title
+              </label>            
+              <input type="text" id="form4Example1" class="form-control-modern" name="title" placeholder="Enter page title" value="<%= title %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;" required/>
+            </div>
+          
+            <!-- Slug input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="slug" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-link" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                URL Slug
+              </label>            
+              <input type="text" id="form4Example2" class="form-control-modern" name="slug" placeholder="page-url-slug" value="<%= slug %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"/>
+            </div>
+          
+            <!-- Message input -->
+            <div class="form-group-modern" style="margin-bottom: 2rem;">
+              <label class="form-label-modern" for="content" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-file-alt" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Page Content
+              </label>
+              <textarea name="content" class="form-control-modern" id="ta" rows="8" placeholder="Enter page content" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"><%= content %></textarea>
+            </div>
+            
+            <!-- Submit button -->
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+              <a href="/admin/pages" class="btn-modern btn-modern-secondary">
+                <i class="fas fa-times"></i>
+                Cancel
+              </a>
+              <button type="submit" class="btn-modern btn-modern-primary">
+                <i class="fas fa-save"></i>
+                Create Page
+              </button>
+            </div>
+          </form>
+      </div>
     </div>
 
 <%- include("../admin/footer") %>

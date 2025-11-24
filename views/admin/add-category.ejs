@@ -1,31 +1,61 @@
 <%- include("../admin/topbar") %>
  
-<div class="container-fluid">   
+<div class="container-fluid" style="background: #f8fafc; min-height: 100vh; padding: 2rem 0;">   
   <div class="row px-xl-5 pb-3">  
                   
     <div class="col-sm-12">
-    <a class="btn btn-primary" href="/admin/categories" role="button"><i class="fas fa-angle-double-left"></i>back</a>
-    <hr>      
-    <h4 class="mb-3 mt-3">Add Category</h4>
-    <%- include('../messages/adminMessages') %>      
-    <form method="post" action="/admin/categories/add-category" enctype="multipart/form-data">
+      <a class="btn-modern btn-modern-secondary" href="/admin/categories" style="margin-bottom: 1.5rem; display: inline-flex; align-items: center;">
+        <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+        Back to Categories
+      </a>
 
-        <!-- Name input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="title">Title</label>            
-          <input type="text" id="form4Example1" class="form-control" name="title" placeholder="title" value="<%= title %>"/>
-        </div>
+      <div class="admin-header-modern" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: white; margin: 0; font-size: 1.75rem; font-weight: 600; display: flex; align-items: center;">
+          <i class="fas fa-plus-circle" style="margin-right: 0.75rem;"></i>
+          Add New Category
+        </h2>
+        <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0; font-size: 0.95rem;">Create a new product category</p>
+      </div>
 
-        <!-- image input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="image">Image</label>            
-          <input type="file" class="form-control" name="image" placeholder="upload image" id="img"/>
-          <img src="/images/noimage.png" id="imgPreview">
-        </div>
+      <%- include('../messages/adminMessages') %>
 
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary mb-4">Submit</button>
-      </form>
+      <div class="card-modern" style="background: white; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); padding: 2rem;">      
+        <form method="post" action="/admin/categories/add-category" enctype="multipart/form-data">
+
+            <!-- Name input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="title" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-tag" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Category Title
+              </label>            
+              <input type="text" id="form4Example1" class="form-control-modern" name="title" placeholder="Enter category title" value="<%= title %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;" required/>
+            </div>
+
+            <!-- image input -->
+            <div class="form-group-modern" style="margin-bottom: 2rem;">
+              <label class="form-label-modern" for="image" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-image" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Category Image
+              </label>            
+              <input type="file" class="form-control-modern" name="image" id="img" accept="image/*" style="width: 100%; padding: 0.75rem 1rem; border: 2px dashed #cbd5e1; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease; background: #f8fafc;"/>
+              <div style="margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; text-align: center;">
+                <img src="/images/noimage.png" id="imgPreview" style="max-width: 200px; border-radius: 8px; border: 2px solid #e5e7eb;">
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+              <a href="/admin/categories" class="btn-modern btn-modern-secondary">
+                <i class="fas fa-times"></i>
+                Cancel
+              </a>
+              <button type="submit" class="btn-modern btn-modern-primary">
+                <i class="fas fa-save"></i>
+                Create Category
+              </button>
+            </div>
+          </form>
+      </div>
     </div>
     <script>
             function readURL(input) {

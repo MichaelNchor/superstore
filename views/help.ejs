@@ -1,0 +1,156 @@
+<%- include("topbar") -%>
+<%- include("modern-nav") -%>
+
+<!-- Hero Section -->
+<div class="container-fluid" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); padding: 4rem 0; margin-bottom: 3rem;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 style="color: white; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+          <i class="fas fa-life-ring" style="margin-right: 1rem;"></i>
+          Help Center
+        </h1>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 2rem;">
+          Get answers to your questions and learn how to use our platform
+        </p>
+        
+        <!-- Search Box -->
+        <div style="max-width: 600px; margin: 0 auto;">
+          <div class="input-group" style="box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+            <input type="text" class="form-control" placeholder="Search for help..." style="padding: 1rem 1.5rem; border: none; font-size: 1rem; border-radius: 50px 0 0 50px;">
+            <div class="input-group-append">
+              <button class="btn btn-light" type="button" style="padding: 1rem 2rem; border: none; border-radius: 0 50px 50px 0; background: white; color: #2563eb; font-weight: 600;">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Help Topics -->
+<div class="container pb-5">
+  <div class="row px-xl-5">
+    
+    <!-- Getting Started -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-rocket" style="font-size: 2rem; color: #2563eb;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Getting Started</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Learn the basics of creating an account, browsing products, and making your first purchase.</p>
+          <a href="#getting-started" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders & Shipping -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-shipping-fast" style="font-size: 2rem; color: #7c3aed;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Orders & Shipping</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Track your orders, understand shipping times, and manage deliveries with ease.</p>
+          <a href="#orders" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-credit-card" style="font-size: 2rem; color: #2563eb;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Payment Methods</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Secure payment options, refunds policy, and how to manage your payment methods.</p>
+          <a href="#payment" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Settings -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-user-cog" style="font-size: 2rem; color: #7c3aed;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Account Settings</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Manage your profile, update preferences, change password, and more.</p>
+          <a href="#account" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Returns & Refunds -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-undo" style="font-size: 2rem; color: #2563eb;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Returns & Refunds</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Easy returns process, refund timelines, and policy details explained.</p>
+          <a href="#returns" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Support -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card-modern" style="height: 100%; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px 0 rgba(0, 0, 0, 0.1)';">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-headset" style="font-size: 2rem; color: #7c3aed;"></i>
+          </div>
+          <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem;">Technical Support</h4>
+          <p style="color: #64748b; line-height: 1.6; margin-bottom: 1.5rem;">Having technical issues? Find solutions to common problems and contact support.</p>
+          <a href="#support" class="btn-modern btn-modern-primary" style="font-size: 0.9rem;">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact Support CTA -->
+  <div class="row px-xl-5 mt-5">
+    <div class="col-12">
+      <div style="background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%); border-radius: 16px; padding: 3rem; text-align: center; border: 2px solid #e0e7ff;">
+        <h3 style="color: #1e293b; font-weight: 600; margin-bottom: 1rem; font-size: 1.8rem;">Still Need Help?</h3>
+        <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Can't find what you're looking for? Our support team is here to help you 24/7.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="/contact" class="btn-modern btn-modern-primary" style="font-size: 1rem; padding: 0.875rem 2rem;">
+            <i class="fas fa-envelope"></i> Contact Support
+          </a>
+          <a href="/faqs" class="btn-modern btn-modern-secondary" style="font-size: 1rem; padding: 0.875rem 2rem;">
+            <i class="fas fa-question-circle"></i> View FAQs
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("footer") -%>

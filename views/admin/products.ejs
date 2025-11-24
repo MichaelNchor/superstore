@@ -1,52 +1,155 @@
 <%- include("../admin/topbar") %>
 
-<div class="container-fluid">   
+<style>
+    .admin-header {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+    
+    .admin-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin: 0;
+    }
+    
+    .stats-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-modern-admin {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .table-modern-admin thead {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    }
+    
+    .table-modern-admin thead th {
+        color: white;
+        font-weight: 600;
+        padding: 1rem;
+        border: none;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .table-modern-admin tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #e5e7eb;
+        color: #4b5563;
+    }
+    
+    .table-modern-admin tbody tr:hover {
+        background: #f9fafb;
+    }
+    
+    .table-modern-admin tbody tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .table-modern-admin img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div class="container-fluid py-4">   
     <div class="row px-xl-5 pb-3">  
                     
       <div class="col-sm-12">
-      <a class="btn btn-primary" href="/admin/products/add-product" role="button">Add new product</a>
-      <hr>      
-      <h4 class="mb-3 mt-3">Product</h4>
-      <br><br>
+      <div class="admin-header d-flex justify-content-between align-items-center mb-4">
+          <div>
+              <h1><i class="fas fa-box-open mr-3" style="color: #2563eb;"></i>Products Management</h1>
+              <p style="color: #6b7280; margin: 0.5rem 0 0 0;">Manage your product catalog</p>
+          </div>
+          <a class="btn btn-modern btn-modern-primary px-4 py-3" href="/admin/products/add-product" role="button">
+              <i class="fas fa-plus mr-2"></i>Add New Product
+          </a>
+      </div>
+      
       <%- include('../messages/adminMessages') %> 
       
       <% if (count > 0) { %>
 
-      <table class="table table-striped sorting">
-        <thead>
-            <tr class="home">
-                <th scope="col">Product</th>
-                <th scope="col">Price($)</th>
-                <th scope="col">Category</th>
-                <th scope="col">Description</th>
-                <th scope="col">Product Image</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% products.forEach(function(product){ %>
-            <tr scope="row" id="id_<%= product._id %>" class="<%= product.slug %>">
-                <td><%= product.title %></td>
-                <td><%= parseFloat(product.price).toFixed(2) %></td>
-                <td><%= product.category %></td>
-                <td><%= product.desc_short %></td>
-                <td>
-                    <% if (product.image == "") { %>
-                    <img id="noimage" src="/images/noimage.png">
-                    <% } else { %>
-                    <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
-                    <% } %>
-                </td>
-                <td><a class="btn btn-primary text-dark" href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
-                <td><a class="btn btn-danger text-dark" class="confirmDeletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table>
-    <% } else { %>
-    <h3 class="text-center"> There are no products.</h3>  
-    <% } %>
+      <div class="table-modern-admin">
+          <table class="table mb-0 sorting">
+            <thead>
+                <tr class="home">
+                    <th scope="col">Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price ($)</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(function(product){ %>
+                <tr scope="row" id="id_<%= product._id %>" class="<%= product.slug %>">
+                    <td>
+                        <% if (product.image == "") { %>
+                        <img src="/images/noimage.png" alt="No image">
+                        <% } else { %>
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" alt="<%= product.title %>">
+                        <% } %>
+                    </td>
+                    <td style="font-weight: 600; color: #1f2937;"><%= product.title %></td>
+                    <td style="font-weight: 600; color: #2563eb;">$<%= parseFloat(product.price).toFixed(2) %></td>
+                    <td>
+                        <span class="badge-modern badge-primary"><%= product.category %></span>
+                    </td>
+                    <td style="max-width: 300px;">
+                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <%= product.desc_short %>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center gap-2" style="gap: 0.5rem;">
+                            <a class="btn btn-modern btn-modern-primary btn-sm" href="/admin/products/edit-product/<%= product._id %>" title="Edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a class="btn btn-modern btn-modern-secondary btn-sm confirmDeletion" href="/admin/products/delete-product/<%= product._id %>" style="background: #ef4444; color: white;" title="Delete">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+      </div>
+      <% } else { %>
+      <div class="empty-state-modern">
+          <div class="icon">
+              <i class="fas fa-box-open"></i>
+          </div>
+          <h3>No Products Yet</h3>
+          <p>Start adding products to your store</p>
+          <a href="/admin/products/add-product" class="btn btn-modern btn-modern-primary px-5 py-3">
+              <i class="fas fa-plus mr-2"></i>Add Your First Product
+          </a>
+      </div>
+      <% } %>
     </div>
     
       <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

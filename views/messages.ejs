@@ -2,8 +2,15 @@
 
 <% if (errors) {%>
     <% errors.forEach(function(error) { %>
-    <div class="alert alert-danger">
-        <%= error.msg %>
+    <div class="alert-modern alert-modern-error animate__animated animate__fadeInDown">
+        <i class="fas fa-exclamation-circle" style="font-size: 1.5rem;"></i>
+        <div style="flex: 1;">
+            <strong style="display: block; margin-bottom: 0.25rem;">Error</strong>
+            <span><%= error.msg %></span>
+        </div>
+        <button onclick="$(this).parent().fadeOut()" style="background: none; border: none; color: inherit; font-size: 1.25rem; cursor: pointer; margin-left: 1rem;">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
     <% });%>
 <% } %>

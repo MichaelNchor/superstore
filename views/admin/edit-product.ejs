@@ -1,98 +1,163 @@
 <%- include("../admin/topbar") %>
  
-<div class="container-fluid">   
+<div class="container-fluid" style="background: #f8fafc; min-height: 100vh; padding: 2rem 0;">   
   <div class="row px-xl-5 pb-3">  
                   
     <div class="col-sm-12">
-    <a class="btn btn-primary" href="/admin/products" role="button"><i class="fas fa-angle-double-left"></i>back</a>
-    <hr>      
-    <h4 class="mb-3 mt-3">Edit Product</h4>
-    <%- include('../messages/adminMessages') %>      
-    <form method="post" action="/admin/products/edit-product/<%= id %>" enctype="multipart/form-data">
+      <a class="btn-modern btn-modern-secondary" href="/admin/products" style="margin-bottom: 1.5rem; display: inline-flex; align-items: center;">
+        <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+        Back to Products
+      </a>
 
-        <!-- Name input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="title">Title </label>            
-          <input type="text" id="form4Example1" class="form-control" name="title" placeholder="title" value="<%= title %>"/>
-        </div>
+      <div class="admin-header-modern" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: white; margin: 0; font-size: 1.75rem; font-weight: 600; display: flex; align-items: center;">
+          <i class="fas fa-edit" style="margin-right: 0.75rem;"></i>
+          Edit Product
+        </h2>
+        <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0; font-size: 0.95rem;">Update product information and gallery</p>
+      </div>
 
-        <!-- Short Description input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="desc_short">Short Description</label>
-          <input type="text" id="form4Example7" class="form-control" name="desc_short" placeholder="desc_short" value="<%= desc_short %>"/>
-        </div>
+      <%- include('../messages/adminMessages') %>
 
-        <!-- Description input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="desc">Content</label>
-          <textarea name="desc" class="form-control" id="ta" rows="4" placeholder="description"><%= desc %></textarea>
-        </div>        
+      <div class="card-modern" style="background: white; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); padding: 2rem; margin-bottom: 2rem;">      
+        <form method="post" action="/admin/products/edit-product/<%= id %>" enctype="multipart/form-data">
 
-        <!-- price input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="price">Price</label>            
-          <input type="text" id="form4Example2" class="form-control" name="price" placeholder="price" value="<%= price %>"/>
-        </div>
+            <!-- Name input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="title" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-box" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Product Title
+              </label>            
+              <input type="text" id="form4Example1" class="form-control-modern" name="title" placeholder="Enter product title" value="<%= title %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;" required/>
+            </div>
 
-        <!-- discount input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="discount">Discount(%)</label>         
-          <input type="number" id="form4Example99" class="form-control" name="discount" placeholder="discount" value="<%= discount %>" min="0" max="100"/>
-        </div>
+            <!-- Short Description input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="desc_short" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-align-left" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Short Description
+              </label>
+              <input type="text" id="form4Example7" class="form-control-modern" name="desc_short" placeholder="Brief product description" value="<%= desc_short %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"/>
+            </div>
 
-        <!-- category input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="s">Category</label>            
-          <select name="category" class="form-control">
-          <% categories.forEach(function(category) { %>
-            <option id="category_select" value="<%= category.slug %>"><%= category.title %></option>
-          <% }); %>
-        </select>
-        </div>
+            <!-- Description input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="desc" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-file-alt" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Full Description
+              </label>
+              <textarea name="desc" class="form-control-modern" id="ta" rows="4" placeholder="Detailed product description" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"><%= desc %></textarea>
+            </div>        
 
-        <!-- image input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="image">Current Image</label>            
-          <% if (image == "") { %>
-            <img id="noimage" src="/images/noimage.png" alt="">
-            <% } else {%>
-            <img id="noimage" src="/product_images/<%= id %>/<%= image %>" alt="">
+            <div class="row">
+              <div class="col-md-6">
+                <!-- price input -->
+                <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+                  <label class="form-label-modern" for="price" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                    <i class="fas fa-dollar-sign" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                    Price
+                  </label>            
+                  <input type="text" id="form4Example2" class="form-control-modern" name="price" placeholder="0.00" value="<%= price %>" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"/>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <!-- discount input -->
+                <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+                  <label class="form-label-modern" for="discount" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                    <i class="fas fa-percent" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                    Discount (%)
+                  </label>         
+                  <input type="number" id="form4Example99" class="form-control-modern" name="discount" placeholder="0" value="<%= discount %>" min="0" max="100" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- category input -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="s" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-tag" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Category
+              </label>            
+              <select name="category" class="form-control-modern" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease;">
+                <% categories.forEach(function(category) { %>
+                  <option id="category_select" value="<%= category.slug %>"><%= category.title %></option>
+                <% }); %>
+              </select>
+            </div>
+
+            <!-- Current image -->
+            <div class="form-group-modern" style="margin-bottom: 1.5rem;">
+              <label class="form-label-modern" for="image" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-image" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Current Image
+              </label>            
+              <div style="padding: 1rem; background: #f8fafc; border-radius: 8px; text-align: center;">
+                <% if (image == "") { %>
+                  <img id="noimage" src="/images/noimage.png" alt="" style="max-width: 200px; border-radius: 8px; border: 2px solid #e5e7eb;">
+                <% } else {%>
+                  <img id="noimage" src="/product_images/<%= id %>/<%= image %>" alt="" style="max-width: 200px; border-radius: 8px; border: 2px solid #e5e7eb;">
+                <% } %>
+              </div>
+            </div>        
+
+            <!-- Upload new image -->
+            <div class="form-group-modern" style="margin-bottom: 2rem;">
+              <label class="form-label-modern" for="image" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;">
+                <i class="fas fa-upload" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                Upload New Image
+              </label>            
+              <input type="file" class="form-control-modern" name="image" id="img" accept="image/*" style="width: 100%; padding: 0.75rem 1rem; border: 2px dashed #cbd5e1; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease; background: #f8fafc;"/>
+              <div style="margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; text-align: center;">
+                <img src="/images/noimage.png" id="imgPreview" alt="" style="max-width: 200px; border-radius: 8px; border: 2px solid #e5e7eb; display: none;">
+              </div>
+            </div>  
+
+            <!-- Submit button -->
+            <input type="hidden" name="pimage" value="<%= image %>">
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+              <a href="/admin/products" class="btn-modern btn-modern-secondary">
+                <i class="fas fa-times"></i>
+                Cancel
+              </a>
+              <button type="submit" class="btn-modern btn-modern-primary">
+                <i class="fas fa-save"></i>
+                Update Product
+              </button>
+            </div>
+          </form>
+      </div>
+
+      <!-- Gallery Section -->
+      <div class="card-modern" style="background: white; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); padding: 2rem;">
+        <h3 style="color: #1e293b; font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center;">
+          <i class="fas fa-images" style="margin-right: 0.75rem; color: #8b5cf6;"></i>
+          Product Gallery
+        </h3>
+        
+        <ul class="gallery" style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <% galleryImages.forEach(function(image){ %>
+            <% if (image != "thumbs") { %>
+            <li style="position: relative; background: #f8fafc; border-radius: 8px; padding: 0.5rem; border: 2px solid #e5e7eb;">
+                <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>" alt="" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 0.5rem;">
+                <a class="confirmDeletion btn-modern btn-modern-danger" href="/admin/products/delete-image/<%= image %>?id=<%= id %>" style="font-size: 0.75rem; padding: 0.35rem 0.6rem; width: 100%; text-align: center; display: block;">
+                  <i class="fas fa-trash"></i> Delete
+                </a>
+            </li>
             <% } %>
-        </div>        
-
-        <!-- image input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="image">Upload Image</label>            
-          <input type="file" class="form-control" name="image" placeholder="upload image" id="img"/>
-          <img src="/images/noimage.png" id="imgPreview" alt="">
-        </div>  
-
-        <!-- Submit button -->
-        <input type="hidden" name="pimage" value="<%= image %>">
-        <button type="submit" class="btn btn-primary mb-4">Submit</button>
-      </form>
-
-      <hr>
-      <h3 class="page-header">Gallery</h3>
-      
-      <ul class="gallery">
-          <% galleryImages.forEach(function(image){ %>
-          <% if (image != "thumbs") { %>
-          <li>
-              <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>" alt="">&nbsp;
-              <a class="confirmDeletion text-dark" href="/admin/products/delete-image/<%= image %>?id=<%= id %>">delete</a>
-          </li>
-          <% } %>
-          <% }); %>
-      </ul>
-      
-      <br><br>
-      <form action="/admin/products/product-gallery/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
-          <div class="fallback">
-              <input type="file" name="file" multiple>
-              <input type="submit" value="Upload">
-          </div>
-      </form>      
+            <% }); %>
+        </ul>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e5e7eb;">
+          <h4 style="color: #1e293b; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Upload More Images</h4>
+          <form action="/admin/products/product-gallery/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc;">
+              <div class="fallback">
+                  <input type="file" name="file" multiple>
+                  <input type="submit" value="Upload">
+              </div>
+          </form>
+        </div>
+      </div>
 
     </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/basic.css"/>

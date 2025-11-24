@@ -1,37 +1,63 @@
 <%- include("../admin/topbar") %>
-<div class="container-fluid">   
+<div class="container-fluid" style="background: #f8fafc; min-height: 100vh; padding: 2rem 0;">   
     <div class="row px-xl-5 pb-3">          
       <div class="col-sm-12">
-            <a class="btn btn-primary" href="/admin/pages/add-page" role="button">Add new page</a>
-            <hr>      
-            <h4 class="mb-3 mt-3">Pages</h4>
-            <br><br>
-            <%- include('../messages/adminMessages') %>      
-            <table class="table table-striped sorting">
-              <thead>
-                  <tr class="home">
-                      <th scope="col">Title</th>
-                      <th scope="col">Edit</th>
-                      <th scope="col">Delete</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <% pages.forEach(function(page){ %>
-                  <tr  scope="row" id="id_<%= page._id %>" class="<%= page.slug %>">
-                      <td><%= page.title %></td>
-                      <td><a class="btn btn-primary text-dark" href="/admin/pages/edit-page/<%= page._id %>">Edit</a></td>
-                      <% if (page.slug == "home") { %>
-                      <td></td>
-                      <% }  else {%>
-                      <td><a class="btn btn-danger text-dark" class="confirmDeletion" href="/admin/pages/delete-page/<%= page._id %>">Delete</a></td>
-                      <% }%>
-                  </tr>
-                  <% }); %>
-              </tbody>
-          </table> 
-          <% if(pages.length == 0) { %>
-            <p>No Pages Added</p>
-        <% } %> 
+            <div class="admin-header-modern" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <h2 style="color: white; margin: 0; font-size: 1.75rem; font-weight: 600; display: flex; align-items: center;">
+                    <i class="fas fa-file-alt" style="margin-right: 0.75rem;"></i>
+                    Pages Management
+                  </h2>
+                  <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0; font-size: 0.95rem;">Manage website pages and content</p>
+                </div>
+                <a class="btn-modern btn-modern-primary" href="/admin/pages/add-page" style="background: white; color: #2563eb;">
+                  <i class="fas fa-plus"></i>
+                  Add Page
+                </a>
+              </div>
+            </div>
+
+            <%- include('../messages/adminMessages') %>
+
+            <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); overflow: hidden;">      
+              <table class="table-modern-admin sorting">
+                <thead>
+                    <tr class="home">
+                        <th scope="col">
+                          <i class="fas fa-bookmark" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                          Page Title
+                        </th>
+                        <th scope="col" style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pages.forEach(function(page){ %>
+                    <tr scope="row" id="id_<%= page._id %>" class="<%= page.slug %>" style="cursor: move;">
+                        <td style="font-weight: 500; color: #1e293b;"><%= page.title %></td>
+                        <td style="text-align: center;">
+                          <a class="btn-modern btn-modern-secondary" href="/admin/pages/edit-page/<%= page._id %>" style="margin-right: 0.5rem;">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                          </a>
+                          <% if (page.slug != "home") { %>
+                          <a class="btn-modern btn-modern-danger confirmDeletion" href="/admin/pages/delete-page/<%= page._id %>">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                          </a>
+                          <% } %>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+              </table>
+              <% if(pages.length == 0) { %>
+                <div class="empty-state-modern" style="padding: 4rem 2rem; text-align: center;">
+                  <i class="fas fa-file-alt" style="font-size: 4rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+                  <p style="color: #64748b; font-size: 1.1rem; margin: 0;">No pages added yet. Create your first page!</p>
+                </div>
+              <% } %>
+            </div> 
         </div>
         </div>
         </div>
