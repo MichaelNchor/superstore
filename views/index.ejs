@@ -86,28 +86,172 @@
 
     <!-- Modern Hero Carousel Start -->
     <div class="container-fluid px-0 mb-5">
+        <style>
+            .hero-carousel-modern {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .hero-carousel-modern .carousel-item {
+                height: 550px;
+                position: relative;
+            }
+            
+            .hero-carousel-modern .carousel-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(37, 99, 235, 0.7) 0%, rgba(124, 58, 237, 0.6) 100%);
+                z-index: 1;
+            }
+            
+            .hero-carousel-modern .carousel-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            
+            .hero-carousel-modern .carousel-caption {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translateY(-50%);
+                z-index: 2;
+                padding: 0 2rem;
+            }
+            
+            .hero-carousel-modern .carousel-caption h1 {
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                font-weight: 800;
+                line-height: 1.2;
+                margin-bottom: 1.5rem;
+                text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+            
+            .hero-carousel-modern .carousel-caption p {
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                margin-bottom: 2rem;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                opacity: 0.95;
+            }
+            
+            .hero-carousel-modern .carousel-indicators {
+                bottom: 2rem;
+                z-index: 3;
+            }
+            
+            .hero-carousel-modern .carousel-indicators li {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                margin: 0 6px;
+                background: rgba(255, 255, 255, 0.5);
+                border: 2px solid white;
+                transition: all 0.3s ease;
+            }
+            
+            .hero-carousel-modern .carousel-indicators li.active {
+                width: 40px;
+                border-radius: 6px;
+                background: white;
+            }
+            
+            .hero-carousel-modern .carousel-control-prev,
+            .hero-carousel-modern .carousel-control-next {
+                width: 60px;
+                height: 60px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 50%;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+            
+            .hero-carousel-modern:hover .carousel-control-prev,
+            .hero-carousel-modern:hover .carousel-control-next {
+                opacity: 1;
+            }
+            
+            .hero-carousel-modern .carousel-control-prev {
+                left: 2rem;
+            }
+            
+            .hero-carousel-modern .carousel-control-next {
+                right: 2rem;
+            }
+            
+            .hero-carousel-modern .carousel-control-prev-icon,
+            .hero-carousel-modern .carousel-control-next-icon {
+                width: 24px;
+                height: 24px;
+                background-size: 100%;
+                filter: invert(1);
+            }
+            
+            @media (max-width: 768px) {
+                .hero-carousel-modern .carousel-item {
+                    height: 400px;
+                }
+                
+                .hero-carousel-modern .carousel-caption {
+                    padding: 0 1rem;
+                }
+                
+                .hero-carousel-modern .carousel-control-prev,
+                .hero-carousel-modern .carousel-control-next {
+                    width: 45px;
+                    height: 45px;
+                    opacity: 0.8;
+                }
+                
+                .hero-carousel-modern .carousel-control-prev {
+                    left: 1rem;
+                }
+                
+                .hero-carousel-modern .carousel-control-next {
+                    right: 1rem;
+                }
+                
+                .hero-carousel-modern .carousel-indicators {
+                    bottom: 1rem;
+                }
+            }
+            
+            @media (max-width: 576px) {
+                .hero-carousel-modern .carousel-item {
+                    height: 350px;
+                }
+            }
+        </style>
+        
         <div class="hero-carousel-modern">
             <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
-                <ol class="carousel-indicators" style="bottom: 2rem;">
+                <ol class="carousel-indicators">
                     <% carousels.forEach(function(carousel, index){ %>
-                    <li data-target="#header-carousel" data-slide-to="<%= index %>" class="<%= index === 0 ? 'active' : '' %>" style="width: 12px; height: 12px; border-radius: 50%; margin: 0 0.5rem; background: rgba(255,255,255,0.5); border: 2px solid white;"></li>
+                    <li data-target="#header-carousel" data-slide-to="<%= index %>" class="<%= index === 0 ? 'active' : '' %>"></li>
                     <% }); %>
                 </ol>
                 <div class="carousel-inner">
                     <% carousels.forEach(function(carousel, index){ %>
                     <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                        <img class="w-100 h-100" src="/carousel/<%= carousel._id %>/<%= carousel.image %>" style="object-fit: cover;" alt="<%= carousel.title %>">
+                        <img src="/carousel/<%= carousel._id %>/<%= carousel.image %>" alt="<%= carousel.title %>">
                         <div class="carousel-caption">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-8">
-                                        <h1 class="text-white mb-4 animate__animated animate__fadeInUp" style="font-size: 3.5rem; font-weight: 800; line-height: 1.2; text-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                                    <div class="col-lg-8 col-md-10 mx-auto text-center text-md-left">
+                                        <h1 class="text-white animate__animated animate__fadeInUp">
                                             <%= carousel.title %>
                                         </h1>
-                                        <p class="text-white mb-5 animate__animated animate__fadeInUp animate__delay-1s" style="font-size: 1.25rem; max-width: 600px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                                        <p class="text-white animate__animated animate__fadeInUp animate__delay-1s">
                                             <%= carousel.subtext %>
                                         </p>
-                                        <a class="btn btn-modern btn-modern-primary px-5 py-3 animate__animated animate__fadeInUp animate__delay-2s" href="/products" style="font-size: 1.1rem;">
+                                        <a class="btn btn-modern btn-modern-primary px-4 py-3 animate__animated animate__fadeInUp animate__delay-2s" href="/products" style="font-size: 1rem; font-weight: 600; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);">
                                             <i class="fas fa-shopping-bag mr-2"></i>Shop Now
                                         </a>
                                     </div>
@@ -117,11 +261,11 @@
                     </div>
                     <% }); %>
                 </div>
-                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev" style="width: 5%;">
-                    <span class="carousel-control-prev-icon" style="width: 50px; height: 50px; background-color: rgba(37, 99, 235, 0.8); border-radius: 50%;"></span>
+                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
                 </a>
-                <a class="carousel-control-next" href="#header-carousel" data-slide="next" style="width: 5%;">
-                    <span class="carousel-control-next-icon" style="width: 50px; height: 50px; background-color: rgba(37, 99, 235, 0.8); border-radius: 50%;"></span>
+                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
                 </a>
             </div>
         </div>
@@ -307,24 +451,7 @@
     </div>
     <!-- Modern Products End -->
 
-    <!-- Modern Partners Start -->
-    <div class="container-fluid section-modern" style="background: white;">
-        <div class="container">
-            <h2 class="section-title-modern">Our Trusted Partners</h2>
-            <div class="row px-xl-5">
-                <div class="col-12">
-                    <div class="owl-carousel vendor-carousel" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem;">
-                        <% companys.forEach(function(company){ %>
-                        <div class="p-4 animate-on-scroll" style="background: #f9fafb; border-radius: 1rem; transition: all 0.3s; border: 1px solid #e5e7eb;">
-                            <img src="/company/<%= company._id %>/<%= company.image %>" alt="Partner" style="max-height: 80px; width: auto; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;">
-                        </div>
-                        <% }) %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modern Partners End -->
+
 
     <%- include("footer") -%>
 

@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="mt-3 m-3 mt-lg-0 ml-lg-3 text-center">
-                        <h3  class="font-weight-semi-bold mb-4"><%= currency %> <%= ((product.price - (product.price*product.discount/100))*exrate).toFixed(2) %></h3><del><%= currency %> <%= (product.price*exrate).toFixed(2) %></del>
+                        <h4 class="font-weight-semi-bold mb-3" style="font-size: 1.5rem;"><%= currency %> <%= ((product.price - (product.price*product.discount/100))*exrate).toFixed(2) %></h4><del style="font-size: 1rem;"><%= currency %> <%= (product.price*exrate).toFixed(2) %></del>
 
                         <div>
                             <% for(var i = 0 ; i < Math.floor(product.rating) ; i ++){ %>

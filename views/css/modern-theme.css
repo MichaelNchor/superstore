@@ -367,13 +367,26 @@ h6 { font-size: var(--text-base); }
 }
 
 .product-card-modern .current-price {
-  font-size: var(--text-2xl);
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--primary-color);
 }
 
 .product-card-modern .original-price {
-  font-size: var(--text-lg);
+  font-size: 0.95rem;
+  color: var(--gray-400);
+  text-decoration: line-through;
+}
+
+/* Generic price styling */
+.current-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.old-price {
+  font-size: 0.95rem;
   color: var(--gray-400);
   text-decoration: line-through;
 }

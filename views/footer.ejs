@@ -1,111 +1,150 @@
     <!-- Modern Footer Start -->
-    <footer class="footer-modern">
+    <footer class="footer-modern" style="background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); color: white; padding: 4rem 0 0;">
         <div class="container">
-            <div class="row px-xl-5">
+            <div class="row px-xl-5 mb-5">
                 <!-- Company Info -->
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="mb-4">
-                        <a href="/" class="d-flex align-items-center text-decoration-none mb-4">
-                            <img src="/img/logo.png" alt="Super Store" height="50" class="mr-3">
-                            <span style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: white;">Super Store</span>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="/" class="d-inline-flex align-items-center text-decoration-none mb-4">
+                        <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <i class="fas fa-store" style="font-size: 1.5rem; color: white;"></i>
+                        </div>
+                        <span style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Super Store</span>
+                    </a>
+                    <p style="color: #94a3b8; line-height: 1.8; font-size: 0.95rem; margin-bottom: 2rem;">Your one-stop destination for quality products at amazing prices. Shop with confidence.</p>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <a href="tel:+233591910800" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; transition: all 0.2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#cbd5e1'">
+                            <div style="width: 40px; height: 40px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <i class="fas fa-phone-alt" style="color: #2563eb;"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: #64748b;">Call Us</div>
+                                <div style="font-weight: 600;">+233 59 191 0800</div>
+                            </div>
                         </a>
-                        <p style="color: #d1d5db; line-height: 1.8;">#1 Shop for All Your Needs. Quality products, amazing prices, and exceptional service.</p>
                     </div>
-                    <h5 class="mb-4">Get In Touch</h5>
-                    <div class="mb-3">
-                        <i class="fas fa-map-marker-alt mr-3" style="color: #2563eb;"></i>
-                        <span>Mango Street, Kumasi</span>
-                    </div>
-                    <div class="mb-3">
-                        <i class="fas fa-envelope mr-3" style="color: #2563eb;"></i>
-                        <a href="mailto:info@superstore.com" style="color: #d1d5db;">info@superstore.com</a>
-                    </div>
-                    <div class="mb-3">
-                        <i class="fas fa-phone-alt mr-3" style="color: #2563eb;"></i>
-                        <a href="tel:+233591910800" style="color: #d1d5db;">+233 59 191 0800</a>
+                    
+                    <div>
+                        <a href="mailto:info@superstore.com" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; transition: all 0.2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#cbd5e1'">
+                            <div style="width: 40px; height: 40px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <i class="fas fa-envelope" style="color: #2563eb;"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: #64748b;">Email Us</div>
+                                <div style="font-weight: 600;">info@superstore.com</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 
                 <!-- Quick Links -->
-                <div class="col-lg-2 col-md-6 mb-5">
-                    <h5 class="mb-4">Quick Links</h5>
-                    <div class="d-flex flex-column">
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Quick Links</h5>
+                    <div class="d-flex flex-column" style="gap: 0.75rem;">
                         <% pages.forEach(function(page){ %>
                         <% if (page.slug == 'home'){ %>
-                            <a href="/" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %></a>
+                            <a href="/" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                                <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %>
+                            </a>
                         <% } else if (page.slug == 'profile' || page.slug == 'checkout'){ %>
-                            <!-- Skip these pages -->
+                            <!-- Skip -->
                         <% } else { %>
-                            <a href="/<%= page.slug %>" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %></a>
+                            <a href="/<%= page.slug %>" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                                <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= page.title %>
+                            </a>
                         <% } %>
                         <% }) %>
                     </div>
                 </div>
                 
                 <!-- My Account -->
-                <div class="col-lg-2 col-md-6 mb-5">
-                    <h5 class="mb-4">My Account</h5>
-                    <div class="d-flex flex-column">
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">My Account</h5>
+                    <div class="d-flex flex-column" style="gap: 0.75rem;">
                         <% if(user) { %>
-                        <a href="/profile" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>My Profile</a>
-                        <a href="/cart" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Shopping Cart</a>
-                        <a href="/wishlist" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Wishlist</a>
+                        <a href="/profile" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>My Profile
+                        </a>
+                        <a href="/cart" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Shopping Cart
+                        </a>
+                        <a href="/wishlist" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Wishlist
+                        </a>
                         <% } else { %>
-                        <a href="/users/login" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Login</a>
-                        <a href="/users/register" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Register</a>
+                        <a href="/users/login" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Login
+                        </a>
+                        <a href="/users/register" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Register
+                        </a>
                         <% } %>
-                        <a href="/cart/checkout" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Checkout</a>
+                        <a href="/cart/checkout" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i>Checkout
+                        </a>
                     </div>
                 </div>
                 
                 <!-- Categories -->
-                <div class="col-lg-2 col-md-6 mb-5">
-                    <h5 class="mb-4">Categories</h5>
-                    <div class="d-flex flex-column">
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Categories</h5>
+                    <div class="d-flex flex-column" style="gap: 0.75rem;">
                         <% categories.slice(0, 6).forEach(function(category){ %>
-                        <a href="/products/<%= category.slug %>" class="mb-3"><i class="fas fa-chevron-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= category.title %></a>
+                        <a href="/products/<%= category.slug %>" style="color: #94a3b8; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;" onmouseover="this.style.color='#2563eb'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0'">
+                            <i class="fas fa-angle-right mr-2" style="font-size: 0.75rem; color: #2563eb;"></i><%= category.title %>
+                        </a>
                         <% }) %>
                     </div>
                 </div>
                 
-                <!-- Newsletter & Social -->
-                <div class="col-lg-2 col-md-6 mb-5">
-                    <h5 class="mb-4">Follow Us</h5>
-                    <div class="social-links d-flex flex-wrap gap-2">
-                        <a href="#" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" title="Facebook">
+                <!-- Social & Payment -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Connect</h5>
+                    <div class="d-flex flex-wrap" style="gap: 0.75rem; margin-bottom: 2rem;">
+                        <a href="#" title="Facebook" style="width: 42px; height: 42px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#2563eb'; this.style.color='white'" onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='#2563eb'">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" title="Instagram">
+                        <a href="#" title="Twitter" style="width: 42px; height: 42px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#2563eb'; this.style.color='white'" onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='#2563eb'">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" title="Instagram" style="width: 42px; height: 42px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#2563eb'; this.style.color='white'" onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='#2563eb'">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" title="LinkedIn">
+                        <a href="#" title="LinkedIn" style="width: 42px; height: 42px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#2563eb'; this.style.color='white'" onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='#2563eb'">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" title="YouTube">
+                        <a href="#" title="YouTube" style="width: 42px; height: 42px; background: rgba(37, 99, 235, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#2563eb'; this.style.color='white'" onmouseout="this.style.background='rgba(37, 99, 235, 0.1)'; this.style.color='#2563eb'">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
                     
-                    <div class="mt-5">
-                        <h5 class="mb-4">We Accept</h5>
-                        <img src="/img/payments.png" alt="Payment Methods" class="img-fluid" style="max-width: 150px; opacity: 0.8;">
+                    <div style="margin-top: 2rem;">
+                        <div style="color: #64748b; font-size: 0.875rem; margin-bottom: 0.75rem;">Secure Payments</div>
+                        <div class="d-flex flex-wrap" style="gap: 0.5rem;">
+                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 0.5rem 0.75rem;">
+                                <i class="fab fa-cc-visa" style="font-size: 1.5rem; color: #1a1f71;"></i>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 0.5rem 0.75rem;">
+                                <i class="fab fa-cc-mastercard" style="font-size: 1.5rem; color: #eb001b;"></i>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 0.5rem 0.75rem;">
+                                <i class="fab fa-cc-paypal" style="font-size: 1.5rem; color: #003087;"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Copyright -->
-            <div class="row border-top px-xl-5 py-4" style="border-color: rgba(255, 255, 255, 0.1) !important; margin-top: 3rem;">
+            <div class="row px-xl-5 py-4" style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 3rem;">
                 <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                    <p class="mb-0" style="color: #9ca3af;">
-                        &copy; <span id="year"></span> <strong style="color: white;">Super Store</strong>. All rights reserved.
+                    <p class="mb-0" style="color: #64748b; font-size: 0.9rem;">
+                        &copy; <span id="year"></span> <strong style="color: #cbd5e1;">Super Store</strong>. All rights reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-right">
-                    <p class="mb-0" style="color: #9ca3af;">
-                        Powered by <span style="color: #2563eb; font-weight: 600;">Modern E-Commerce</span>
+                    <p class="mb-0" style="color: #64748b; font-size: 0.9rem;">
+                        Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by <span style="color: #2563eb; font-weight: 600;">Your Team</span>
                     </p>
                 </div>
             </div>
