@@ -244,25 +244,33 @@
                                 <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fas fa-user-circle mr-1"></i>Account
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-right shadow-lg border-0" style="border-radius: 0.75rem; min-width: 220px; background: white; padding: 0.5rem;">
+                                <div class="dropdown-menu dropdown-menu-right shadow-lg border-0" style="border-radius: 1rem; min-width: 240px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 0.75rem; margin-top: 0.5rem;">
                                     <% if (user) { %>
-                                    <a href="/profile" class="dropdown-item py-2" style="color: #1f2937; border-radius: 0.5rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.75rem 1rem;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">
-                                        <i class="fas fa-user mr-3" style="color: #2563eb; width: 20px;"></i>
-                                        <span style="font-weight: 500;">My Profile</span>
+                                    <a href="/profile" class="dropdown-item py-2" style="color: #f1f5f9; border-radius: 0.625rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.875rem 1rem; background: transparent;" onmouseover="this.style.background='rgba(37, 99, 235, 0.2)'; this.style.color='#60a5fa'" onmouseout="this.style.background='transparent'; this.style.color='#f1f5f9'">
+                                        <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 0.875rem;">
+                                            <i class="fas fa-user" style="color: white;"></i>
+                                        </div>
+                                        <span style="font-weight: 600; font-size: 0.95rem;">My Profile</span>
                                     </a>
-                                    <div class="dropdown-divider" style="margin: 0.5rem 0;"></div>
-                                    <a href="/users/logout" class="dropdown-item py-2" style="color: #dc2626; border-radius: 0.5rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.75rem 1rem;" onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='transparent'">
-                                        <i class="fas fa-sign-out-alt mr-3" style="width: 20px;"></i>
-                                        <span style="font-weight: 500;">Logout</span>
+                                    <div class="dropdown-divider" style="margin: 0.625rem 0; border-color: rgba(255, 255, 255, 0.1);"></div>
+                                    <a href="/users/logout" class="dropdown-item py-2" style="color: #fca5a5; border-radius: 0.625rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.875rem 1rem; background: transparent;" onmouseover="this.style.background='rgba(239, 68, 68, 0.15)'; this.style.color='#ef4444'" onmouseout="this.style.background='transparent'; this.style.color='#fca5a5'">
+                                        <div style="width: 36px; height: 36px; background: rgba(239, 68, 68, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 0.875rem;">
+                                            <i class="fas fa-sign-out-alt" style="color: #ef4444;"></i>
+                                        </div>
+                                        <span style="font-weight: 600; font-size: 0.95rem;">Logout</span>
                                     </a>
                                     <% } else { %>
-                                    <a href="/users/register" class="dropdown-item py-2" style="color: #1f2937; border-radius: 0.5rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.75rem 1rem;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">
-                                        <i class="fas fa-user-plus mr-3" style="color: #2563eb; width: 20px;"></i>
-                                        <span style="font-weight: 500;">Register</span>
+                                    <a href="/users/register" class="dropdown-item py-2" style="color: #f1f5f9; border-radius: 0.625rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.875rem 1rem; background: transparent;" onmouseover="this.style.background='rgba(37, 99, 235, 0.2)'; this.style.color='#60a5fa'" onmouseout="this.style.background='transparent'; this.style.color='#f1f5f9'">
+                                        <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 0.875rem;">
+                                            <i class="fas fa-user-plus" style="color: white;"></i>
+                                        </div>
+                                        <span style="font-weight: 600; font-size: 0.95rem;">Register</span>
                                     </a>
-                                    <a href="/users/login" class="dropdown-item py-2" style="color: #1f2937; border-radius: 0.5rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.75rem 1rem;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">
-                                        <i class="fas fa-sign-in-alt mr-3" style="color: #2563eb; width: 20px;"></i>
-                                        <span style="font-weight: 500;">Login</span>
+                                    <a href="/users/login" class="dropdown-item py-2" style="color: #f1f5f9; border-radius: 0.625rem; transition: all 0.2s; display: flex; align-items: center; padding: 0.875rem 1rem; background: transparent; margin-top: 0.25rem;" onmouseover="this.style.background='rgba(37, 99, 235, 0.2)'; this.style.color='#60a5fa'" onmouseout="this.style.background='transparent'; this.style.color='#f1f5f9'">
+                                        <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 0.875rem;">
+                                            <i class="fas fa-sign-in-alt" style="color: white;"></i>
+                                        </div>
+                                        <span style="font-weight: 600; font-size: 0.95rem;">Login</span>
                                     </a>
                                     <% } %>
                                 </div>

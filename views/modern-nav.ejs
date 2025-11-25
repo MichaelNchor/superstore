@@ -1,32 +1,32 @@
 <!-- Modern Category Navigation - Reusable Partial -->
-<div class="container-fluid" style="background: white; border-bottom: 1px solid #e5e7eb;">
+<div class="container-fluid" style="background: linear-gradient(to right, #ffffff 0%, #f8f9fa 100%); border-bottom: 2px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);">
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light py-3">
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarPages" style="border: 2px solid #2563eb; color: #2563eb;">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarPages" style="border: 2px solid #2563eb; color: #2563eb; border-radius: 0.5rem; padding: 0.5rem 0.75rem;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarPages">
-                    <div class="navbar-nav w-100 d-flex justify-content-center" style="gap: 2rem;">
+                    <div class="navbar-nav w-100 d-flex justify-content-center" style="gap: 0.5rem;">
                         <% pages.forEach(function(page){ %>
                             <% if (page.slug == "home") { %>
-                                <a href="/" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                                <a href="/" class="nav-item nav-link font-weight-bold" style="color: #1f2937; padding: 0.625rem 1.25rem; border-radius: 0.625rem; transition: all 0.3s; font-size: 0.975rem;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.color='white'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'" onmouseout="this.style.background='transparent'; this.style.color='#1f2937'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"><%= page.title %></a>
                             <% } else if(page.slug == "checkout"){%>
-                                <a href="/cart/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                                <a href="/cart/<%= page.slug %>" class="nav-item nav-link font-weight-bold" style="color: #1f2937; padding: 0.625rem 1.25rem; border-radius: 0.625rem; transition: all 0.3s; font-size: 0.975rem;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.color='white'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'" onmouseout="this.style.background='transparent'; this.style.color='#1f2937'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"><%= page.title %></a>
                             <% } else if(page.slug == "profile"){%>
                                 <!-- Skip profile -->
                             <% } else { %>
-                                <a href="/<%= page.slug %>" class="nav-item nav-link font-weight-medium" style="color: #4b5563; transition: color 0.2s;"><%= page.title %></a>
+                                <a href="/<%= page.slug %>" class="nav-item nav-link font-weight-bold" style="color: #1f2937; padding: 0.625rem 1.25rem; border-radius: 0.625rem; transition: all 0.3s; font-size: 0.975rem;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.color='white'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'" onmouseout="this.style.background='transparent'; this.style.color='#1f2937'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"><%= page.title %></a>
                             <% } %>
                         <% }); %>
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle font-weight-medium" href="#" data-toggle="dropdown" style="color: #4b5563;">
-                                <i class="fas fa-th mr-1"></i> Categories
+                            <a class="nav-link dropdown-toggle font-weight-bold d-flex align-items-center" href="#" data-toggle="dropdown" style="color: #1f2937; padding: 0.625rem 1.25rem; border-radius: 0.625rem; transition: all 0.3s; background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%); font-size: 0.975rem;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.color='white'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'" onmouseout="this.style.background='linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%)'; this.style.color='#1f2937'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                <i class="fas fa-th mr-2" style="font-size: 0.9rem;"></i> Categories
                             </a>
-                            <div class="dropdown-menu shadow-lg border-0" style="border-radius: 0.75rem; margin-top: 0.5rem;">
-                                <% categories.forEach(function(category){ %>
-                                    <a href="/products/<%= category.slug %>" class="dropdown-item py-2">
-                                        <i class="fas fa-angle-right mr-2" style="color: #2563eb;"></i><%= category.title %>
+                            <div class="dropdown-menu shadow-lg border-0" style="border-radius: 1rem; margin-top: 0.75rem; padding: 0.75rem; min-width: 220px; background: white;">
+                                <% categories.forEach(function(category, index){ %>
+                                    <a href="/products/<%= category.slug %>" class="dropdown-item py-2 d-flex align-items-center" style="color: #1f2937; border-radius: 0.625rem; transition: all 0.3s; padding: 0.75rem 1rem; font-weight: 600; margin-bottom: <%= index < categories.length - 1 ? '0.25rem' : '0' %>;" onmouseover="this.style.background='linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.08) 100%)'; this.style.color='#2563eb'; this.style.paddingLeft='1.25rem'" onmouseout="this.style.background='transparent'; this.style.color='#1f2937'; this.style.paddingLeft='1rem'">
+                                        <i class="fas fa-chevron-right mr-3" style="color: #2563eb; font-size: 0.7rem;"></i><%= category.title %>
                                     </a>
                                 <% }); %>
                             </div>

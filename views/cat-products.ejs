@@ -3,14 +3,29 @@
 
 <!-- Breadcrumb -->
 <div class="container my-4">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent p-0">
-            <li class="breadcrumb-item"><a href="/" class="text-primary"><i class="fas fa-home mr-1"></i>Home</a></li>
-            <li class="breadcrumb-item"><a href="/products" class="text-primary">Shop</a></li>
-            <li class="breadcrumb-item active"><%= title %></li>
+    <nav aria-label="breadcrumb" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb;">
+        <ol class="breadcrumb mb-0" style="background: transparent; padding: 0;">
+            <li class="breadcrumb-item">
+                <a href="/" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; transition: all 0.3s;" onmouseover="this.style.color='#7c3aed'; this.style.transform='translateX(3px)'" onmouseout="this.style.color='#2563eb'; this.style.transform='translateX(0)'">
+                    <i class="fas fa-home mr-2" style="font-size: 0.9rem;"></i>Home
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/products" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s;" onmouseover="this.style.color='#7c3aed'; this.style.transform='translateX(3px)'" onmouseout="this.style.color='#2563eb'; this.style.transform='translateX(0)'">Shop</a>
+            </li>
+            <li class="breadcrumb-item active" style="color: #1f2937; font-weight: 700; font-size: 0.95rem;"><%= title %></li>
         </ol>
     </nav>
 </div>
+
+<style>
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        color: #9ca3af;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+</style>
 
 <!-- Messages -->
 <div class="container">
