@@ -3,71 +3,256 @@
     <%- include("modern-nav") -%>
 
     <!-- Modern Breadcrumb -->
-    <div class="container-fluid" style="background: #f9fafb; padding: 1.5rem 0;">
-        <div class="container">
-            <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav class="breadcrumb-modern">
-                        <a href="/">Home</a>
-                        <span class="separator"><i class="fas fa-chevron-right"></i></span>
-                        <span>Contact Us</span>
-                    </nav>
-                </div>
-            </div>
-        </div>
+    <div class="container my-4">
+        <nav aria-label="breadcrumb" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb;">
+            <ol class="breadcrumb mb-0" style="background: transparent; padding: 0;">
+                <li class="breadcrumb-item">
+                    <a href="/" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; transition: all 0.3s;" onmouseover="this.style.color='#7c3aed'; this.style.transform='translateX(3px)'" onmouseout="this.style.color='#2563eb'; this.style.transform='translateX(0)'">
+                        <i class="fas fa-home mr-2" style="font-size: 0.9rem;"></i>Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" style="color: #1f2937; font-weight: 700; font-size: 0.95rem;">Contact Us</li>
+            </ol>
+        </nav>
     </div>
-    <!-- Modern Breadcrumb End -->
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
 
-
+    <style>
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: "›";
+            color: #9ca3af;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .modern-contact-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 3rem 0;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+            border-radius: 2px;
+        }
+        
+        .contact-header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .modern-contact-form {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .modern-contact-form .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            font-size: 0.975rem;
+            transition: all 0.3s;
+            margin-bottom: 1.25rem;
+        }
+        
+        .modern-contact-form .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+        
+        .modern-contact-form textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-send {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3);
+        }
+        
+        .contact-info-card {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .contact-info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            margin-right: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-info-text {
+            flex: 1;
+        }
+        
+        .contact-info-text p {
+            margin: 0;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .map-container {
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+    </style>
+    
     <!-- Contact Start -->
-    <div class="container-fluid">
-        <h2 class="section-tite position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Contact Us</span></h2>
-        <div class="row px-xl-5">
-            <div class="col-lg-7 mb-5">
-                <div class="rounded-lg contact-form bg-light p-30">
-                    <div id="success"></div>
-                    <form novalidate="novalidate" action="https://formsubmit.co/nchormichael16@gmail.com" method="POST">
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name" name="name"
-                                required="required" data-validation-required-message="Please enter your name" />
-                            <p class="help-block text-danger small"></p>
-                        </div>
-                        <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                required="required" data-validation-required-message="Please enter your email" />
-                            <p class="help-block text-danger small"></p>
-                        </div>
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger small"></p>
-                        </div>
-                        <input type="hidden" name="_next" value="hhttps://superstore-iy8m.onrender.com/contact/thanks">
-                        <div class="control-group">
-                            <textarea class="form-control" rows="8" id="message" placeholder="Message"
-                                required="required"
-                                data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger small"></p>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                                Message</button>
-                        </div>
-                    </form>
-                </div>
+    <div class="modern-contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
             </div>
-            <div class="col-lg-5 mb-5">
-                <div class="rounded-lg bg-light p-30 mb-30">
-                    <iframe  style="width: 100%; height: 250px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126804.7922937674!2d-1.772169455634883!3d6.690231425056262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb9561c430eb75%3A0x8f22232af02139d4!2sKumasi%20International%20Airport!5e0!3m2!1sen!2sgh!4v1683287045675!5m2!1sen!2sgh" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            
+            <div class="row">
+                <div class="col-lg-7 mb-4">
+                    <div class="modern-contact-form">
+                        <h4 style="color: #1f2937; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.5rem;">Send us a Message</h4>
+                        <div id="success"></div>
+                        <form novalidate="novalidate" action="https://formsubmit.co/nchormichael16@gmail.com" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" placeholder="Your Name" name="name"
+                                    required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger small"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" placeholder="Your Email" name="email"
+                                    required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger small"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject"
+                                    required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger small"></p>
+                            </div>
+                            <input type="hidden" name="_next" value="https://superstore-iy8m.onrender.com/contact/thanks">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="6" id="message" placeholder="Your Message" name="message"
+                                    required="required"
+                                    data-validation-required-message="Please enter your message"></textarea>
+                                <p class="help-block text-danger small"></p>
+                            </div>
+                            <div>
+                                <button class="btn-send" type="submit" id="sendMessageButton">
+                                    <i class="fas fa-paper-plane mr-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="rounded-lg bg-light p-30 mb-3">
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Mango Street, Kumasi</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@superstore.com</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+233 59 191 0800</p>
+                
+                <div class="col-lg-5 mb-4">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126804.7922937674!2d-1.772169455634883!3d6.690231425056262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb9561c430eb75%3A0x8f22232af02139d4!2sKumasi%20International%20Airport!5e0!3m2!1sen!2sgh!4v1683287045675!5m2!1sen!2sgh" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <h4 style="color: #1f2937; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.5rem;">Contact Information</h4>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <p>Mango Street, Kumasi</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <p>info@superstore.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <p>+233 59 191 0800</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

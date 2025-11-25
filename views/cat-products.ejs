@@ -41,35 +41,29 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-lg-3 mb-4">
-            <div class="card-modern sidebar-modern">
-                <h5 class="sidebar-title">
-                    <i class="fas fa-filter mr-2"></i>Categories
+            <div class="card-modern sidebar-modern" style="background: white; border-radius: 1.25rem; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb;">
+                <h5 style="margin: 0 0 1.5rem 0; color: #1f2937; font-weight: 800; font-size: 1.25rem; display: flex; align-items: center;">
+                    <i class="fas fa-filter mr-2" style="color: #2563eb;"></i>Shop Categories
                 </h5>
+                
+                <div style="border-top: 2px solid #e5e7eb; padding-top: 1rem;"></div>
                 
                 <!-- All Products -->
                 <% pages.forEach(function(page){ %>
                 <% if (page.slug == "products") { %>
-                <a href="/<%= page.slug %>" class="sidebar-link">
-                    <span><%= page.title.charAt(0).toUpperCase() %><%= page.title.slice(1) %></span>
-                    <span class="badge badge-modern badge-primary">
-                        <% let count = 0; %>
-                        <% product_lengths.forEach(function(p){ count+=p.length; return count}) %>
-                        <%= count %>
-                    </span>
+                <a href="/<%= page.slug %>" class="category-filter-item d-flex align-items-center mb-2 p-3 text-decoration-none" style="background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); border-radius: 0.75rem; border: 1px solid #e5e7eb; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.borderColor='transparent'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'; this.querySelector('.cat-text').style.color='white'; this.querySelector('.cat-icon').style.color='white'" onmouseout="this.style.background='linear-gradient(135deg, #f9fafb 0%, #ffffff 100%)'; this.style.borderColor='#e5e7eb'; this.style.transform='translateX(0)'; this.style.boxShadow='none'; this.querySelector('.cat-text').style.color='#1f2937'; this.querySelector('.cat-icon').style.color='#2563eb'">
+                    <i class="fas fa-th cat-icon mr-3" style="color: #2563eb; font-size: 1.1rem; transition: color 0.3s;"></i>
+                    <span class="cat-text" style="color: #1f2937; font-weight: 600; font-size: 0.95rem; transition: color 0.3s;"><%= page.title.charAt(0).toUpperCase() %><%= page.title.slice(1) %></span>
                 </a>
                 <% } %>
                 <% }) %>
                 
                 <!-- Category Links -->
                 <% categories.forEach(function(category){ %>
-                <% product_lengths.forEach(function(prod){ %>
-                <% if(prod.category == category.slug){ %>
-                <a href="/products/<%= category.slug %>" class="sidebar-link">
-                    <span><%= category.title.charAt(0).toUpperCase() %><%= category.title.slice(1) %></span>
-                    <span class="badge badge-modern badge-secondary"><%= prod.length %></span>
+                <a href="/products/<%= category.slug %>" class="category-filter-item d-flex align-items-center mb-2 p-3 text-decoration-none" style="background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); border-radius: 0.75rem; border: 1px solid #e5e7eb; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.borderColor='transparent'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'; this.querySelector('.cat-text').style.color='white'; this.querySelector('.cat-icon').style.color='white'" onmouseout="this.style.background='linear-gradient(135deg, #f9fafb 0%, #ffffff 100%)'; this.style.borderColor='#e5e7eb'; this.style.transform='translateX(0)'; this.style.boxShadow='none'; this.querySelector('.cat-text').style.color='#1f2937'; this.querySelector('.cat-icon').style.color='#2563eb'">
+                    <i class="fas fa-chevron-right cat-icon mr-3" style="color: #2563eb; font-size: 0.875rem; transition: color 0.3s;"></i>
+                    <span class="cat-text" style="color: #1f2937; font-weight: 600; font-size: 0.95rem; transition: color 0.3s;"><%= category.title.charAt(0).toUpperCase() %><%= category.title.slice(1) %></span>
                 </a>
-                <% } %>
-                <% }) %>
                 <% }) %>
             </div>
         </div>
