@@ -43,6 +43,8 @@
             color: white;
             font-size: 0.875rem;
             padding: 0.5rem 0;
+            position: relative;
+            z-index: 1050;
         }
         
         .modern-main-nav {
@@ -52,6 +54,24 @@
             top: 0;
             z-index: 1000;
             transition: all 0.3s ease;
+        }
+        
+        .account-dropdown {
+            position: relative;
+            z-index: 1060;
+        }
+        
+        .account-dropdown .dropdown-menu {
+            z-index: 1070;
+        }
+        
+        .currency-selector {
+            position: relative;
+            z-index: 1060;
+        }
+        
+        .bootstrap-select .dropdown-menu {
+            z-index: 1070;
         }
         
         .user-avatar {

@@ -44,25 +44,20 @@
                         <div class="card-modern-body" style="padding: 1rem;">
                             <% pages.forEach(function(page){ %>
                                 <% if (page.slug == "products") { %>
-                                    <a href="/<%= page.slug %>" class="d-flex align-items-center justify-content-between mb-3 p-3 text-decoration-none" style="background: #f9fafb; border-radius: 0.5rem; transition: all 0.2s;">
-                                        <span style="color: #1f2937; font-weight: 500;"><%= page.title.charAt(0).toUpperCase() %><%= page.title.slice(1) %></span>
-                                        <span class="badge-modern badge-primary">
-                                            <% let count = 0; %>
-                                            <% product_lengths.forEach(function(p){ count+=p.length; return count}) %>
-                                            <%= count %>                      
-                                        </span>
+                                    <a href="/<%= page.slug %>" class="category-filter-item d-flex align-items-center mb-2 p-3 text-decoration-none" style="background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); border-radius: 0.75rem; border: 1px solid #e5e7eb; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.borderColor='transparent'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'; this.querySelector('.cat-text').style.color='white'; this.querySelector('.cat-icon').style.color='white'" onmouseout="this.style.background='linear-gradient(135deg, #f9fafb 0%, #ffffff 100%)'; this.style.borderColor='#e5e7eb'; this.style.transform='translateX(0)'; this.style.boxShadow='none'; this.querySelector('.cat-text').style.color='#1f2937'; this.querySelector('.cat-icon').style.color='#2563eb'">
+                                        <i class="fas fa-th cat-icon mr-3" style="color: #2563eb; font-size: 1.1rem; transition: color 0.3s;"></i>
+                                        <span class="cat-text" style="color: #1f2937; font-weight: 600; font-size: 0.95rem; transition: color 0.3s;"><%= page.title.charAt(0).toUpperCase() %><%= page.title.slice(1) %></span>
                                     </a>                            
                                 <% } %>
                             <% }) %>
+                            
+                            <div style="border-top: 2px solid #e5e7eb; margin: 1rem 0; padding-top: 1rem;"></div>
+                            
                             <% categories.forEach(function(category){ %>
-                            <% product_lengths.forEach(function(prod){ %>
-                            <% if(prod.category == category.slug){ %>
-                            <a href="/products/<%= category.slug %>" class="d-flex align-items-center justify-content-between mb-3 p-3 text-decoration-none" style="background: #f9fafb; border-radius: 0.5rem; transition: all 0.2s;">
-                                <span style="color: #1f2937; font-weight: 500;"><%= category.title.charAt(0).toUpperCase() %><%= category.title.slice(1) %></span>
-                                <span class="badge-modern badge-primary"><%= prod.length %></span>
-                            </a>
-                            <% } %>
-                            <% }) %>
+                                <a href="/products/<%= category.slug %>" class="category-filter-item d-flex align-items-center mb-2 p-3 text-decoration-none" style="background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); border-radius: 0.75rem; border: 1px solid #e5e7eb; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)'; this.style.borderColor='transparent'; this.style.transform='translateX(5px)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'; this.querySelector('.cat-text').style.color='white'; this.querySelector('.cat-icon').style.color='white'" onmouseout="this.style.background='linear-gradient(135deg, #f9fafb 0%, #ffffff 100%)'; this.style.borderColor='#e5e7eb'; this.style.transform='translateX(0)'; this.style.boxShadow='none'; this.querySelector('.cat-text').style.color='#1f2937'; this.querySelector('.cat-icon').style.color='#2563eb'">
+                                    <i class="fas fa-chevron-right cat-icon mr-3" style="color: #2563eb; font-size: 0.875rem; transition: color 0.3s;"></i>
+                                    <span class="cat-text" style="color: #1f2937; font-weight: 600; font-size: 0.95rem; transition: color 0.3s;"><%= category.title.charAt(0).toUpperCase() %><%= category.title.slice(1) %></span>
+                                </a>
                             <% }) %>
                         </div>
                     </div>
