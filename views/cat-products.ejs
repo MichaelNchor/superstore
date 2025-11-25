@@ -25,6 +25,40 @@
         font-size: 1.25rem;
         font-weight: 600;
     }
+    
+    /* Professional Price Styling */
+    .product-price {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+    }
+    
+    .current-price {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1f2937;
+        line-height: 1;
+    }
+    
+    .original-price {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #9ca3af;
+        text-decoration: line-through;
+        line-height: 1;
+    }
+    
+    .discount-percent {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #10b981;
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.5rem;
+        line-height: 1;
+    }
 </style>
 
 <!-- Messages -->
@@ -122,7 +156,8 @@
                             <div class="product-price">
                                 <span class="current-price"><%= currency %> <%= ((product.price - (product.price*product.discount/100))*exrate).toFixed(2) %></span>
                                 <% if(product.discount > 0) { %>
-                                <span class="old-price"><%= currency %> <%= (product.price*exrate).toFixed(2) %></span>
+                                <span class="original-price"><%= currency %> <%= (product.price*exrate).toFixed(2) %></span>
+                                <span class="discount-percent">Save <%= product.discount %>%</span>
                                 <% } %>
                             </div>
                         </div>
